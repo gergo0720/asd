@@ -139,12 +139,12 @@ public class ReccosC extends JFrame {
 			return;
 
 		JabberSmackApi.getInstance().register(registerPanel.getEmail(),
-												registerPanel.getPassword(),
-												registerPanel.getSex(),
-												registerPanel.getYear(),
-												registerPanel.getMonth(),
-												registerPanel.getDay(),
-												new PropertyChangeListener() {
+                    registerPanel.getPassword(),
+                    registerPanel.getSex(),
+                    registerPanel.getYear(),
+                    registerPanel.getMonth(),
+                    registerPanel.getDay(),
+                    new PropertyChangeListener() {
 			
 			public void propertyChange(PropertyChangeEvent evt) {
 				if(evt.getNewValue().toString().compareTo("success")==0 ){

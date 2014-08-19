@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<match xmlns="http://avatar.inf.unideb.hu/histg" dataBank="MLSZ" refid="613966">
+    <date>2014-03-2T16:00:00+02:00</date>
+    <competition>Magyar Labdarúgó Szövetség - OTP Bank Liga NB I</competition>
+    <location>Budapest, Hidegkuti Nándor Stadion</location>
+    <finalResult home="0" away="0"/>
+    <halfTimeResult home="1" away="2"/>
+    <referee>Kassai Viktor</referee>
+    <teams>
+        <homeTeam refid="76035" name="MTK Budapest">
+            <player number="1" refid="119197" position="goalkeeper" substitute="false">Hegedűs Lajos</player>
+            <player number="4" refid="110837" position="outfield" substitute="false">Baki Ákos</player>
+            <player number="21" refid="517945" position="outfield" substitute="false">Vukmir Dragan</player>
+            <player number="24" refid="517993" position="outfield" substitute="false">Poór Patrik Péter</player>
+            <player number="14" refid="128085" position="outfield" substitute="false">Fejes András</player>
+            <player number="16" refid="356373" position="outfield" substitute="false">Pölöskei Zsolt</player>
+            <player number="7" refid="517069" position="outfield" substitute="false">Vass Ádám</player>
+            <player number="30" refid="133572" position="outfield" substitute="false">Horváth Zsolt</player>
+            <player number="18" refid="162213" position="outfield" substitute="false">Torghelle Sándor</player>
+            <player number="11" refid="111273" position="outfield" substitute="false">Bese Barnabás</player>
+            <player number="6" refid="242613" position="outfield" substitute="false">Ladányi Tibor</player>
+            <player number="2" refid="517152" position="unknown" substitute="true">Nagy Tibo(csere)r</player>
+            <player number="5" refid="144013" position="unknown" substitute="true">Kelemen Dávid (csere)</player>
+            <player number="17" refid="108247" position="unknown" substitute="true">Vass Patrik (csere)</player>
+            <player number="27" refid="173001" position="unknown" substitute="true">Batik Bence (csere)</player>
+            <player number="31" refid="509291" position="unknown" substitute="true">Pintér András (csere)</player>
+            <player number="28" refid="466202" position="unknown" substitute="true">Groppioni Federico (csere)</player>
+            <player number="45" refid="130255" position="unknown" substitute="true">Eppel Márton (csere)</player>
+        </homeTeam>
+        <awayTeam refid="76030" name="Videoton FC">
+            <player number="1" refid="115831" position="goalkeeper" substitute="false">Juan Calatayud</player>
+            <player number="5" refid="516596" position="outfield" substitute="false">Vitor Gomes</player>
+            <player number="11" refid="564509" position="outfield" substitute="false">Sándor György</player>
+            <player number="17" refid="328941" position="outfield" substitute="false">Nikolic Nemanja</player>
+            <player number="22" refid="201771" position="outfield" substitute="false">Stopira</player>
+            <player number="23" refid="523333" position="outfield" substitute="false">Arturo Alvarez</player>
+            <player number="30" refid="192614" position="outfield" substitute="false">Szolnoki Roland</player>
+            <player number="32" refid="111618" position="outfield" substitute="false">Juhász Roland</player>
+            <player number="34" refid="516666" position="outfield" substitute="false">Tar Zsolt</player>
+            <player number="70" refid="119318" position="outfield" substitute="false">Kovács István Ádám</player>
+            <player number="77" refid="158285" position="outfield" substitute="false">Gyurcsó Ádám</player>
+            <player number="6" refid="564734" position="unknown" substitute="true">Nildo (csere)</player>
+            <player number="29" refid="114076" position="unknown" substitute="true">Zé Luis (csere)</player>
+            <player number="16" refid="469452" position="unknown" substitute="true">Filipe Oliveira (csere)</player>
+            <player number="19" refid="516599" position="unknown" substitute="true">Hudák Martin (csere)</player>
+            <player number="9" refid="523340" position="unknown" substitute="true">Lupeta (csere)</player>
+            <player number="12" refid="128864" position="unknown" substitute="true">Tomas Tujvel (csere)</player>
+            <player number="2" refid="518328" position="unknown" substitute="true">Álvaro Brachi (csere)</player>
+        </awayTeam>
+    </teams>
+</match>
