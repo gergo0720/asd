@@ -16,7 +16,7 @@ public class Main extends JDesktopPane{
                                 
                             }
                             
-                            ReccosB f = new ReccosB();
+                            ReccosC f = new ReccosC();
                             f.setVisible(true);
                             f.connect();
                             f.requestFocusInWindow();

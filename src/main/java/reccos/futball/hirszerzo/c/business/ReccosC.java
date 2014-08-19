@@ -20,13 +20,13 @@ import reccos.futball.hirszerzo.c.userinterface.RegisterPanel;
 import reccos.futball.hirszerzo.c.userinterface.WatchPanel;
 
 
-public class ReccosB extends JFrame {
+public class ReccosC extends JFrame {
 	
 	LoginPanel loginPanel;
 	WatchPanel watchPanel;
 	RegisterPanel registerPanel;
 	
-	public ReccosB() {
+	public ReccosC() {
 		setupGUI();
 		addListeners();
 	}
