@@ -16,22 +16,30 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import reccos.futball.hirszerzo.c.business.Annotator;
+import reccos.futball.hirszerzo.c.business.XML;
 
 
 public class PlayerSelectorPanel extends JPanel{
+	String[] players;
+//        {"   Játékvezető", "1  Vukasin Polekszics", "4  JoelDamahou", "6  Zsidai László",
+//			"8  Selim Bouadla", "10 Rene Mihelic", "11 Ferenczi János", "13 Lázár Pál", "14 Vadnai Dániel",
+//			"17 Mészáros Norbert", "18 Máté Péter", "19 Dalibor Volas", "21 Ludánszki Bence", "24 Igor Morozov", "25 Dusan Brkovics",
+//			"26 Ibrahima Sidibe", "27 Bódi Ádám", "28 Nagy Zoltán", "33 Varga József", "44 Tisza Tibor",
+//			"45 Nenad Novakovics", "55 Szakály Péter", "69 Korhut Mihály", "70 Kulcsár Tamás", "87 Verpecz István",
+//			"88 L'imam Seydi"};
 	
-	String[] players = {"   Játékvezető", "1  Vukasin Polekszics", "4  JoelDamahou", "6  Zsidai László",
-			"8  Selim Bouadla", "10 Rene Mihelic", "11 Ferenczi János", "13 Lázár Pál", "14 Vadnai Dániel",
-			"17 Mészáros Norbert", "18 Máté Péter", "19 Dalibor Volas", "21 Ludánszki Bence", "24 Igor Morozov", "25 Dusan Brkovics",
-			"26 Ibrahima Sidibe", "27 Bódi Ádám", "28 Nagy Zoltán", "33 Varga József", "44 Tisza Tibor",
-			"45 Nenad Novakovics", "55 Szakály Péter", "69 Korhut Mihály", "70 Kulcsár Tamás", "87 Verpecz István",
-			"88 L'imam Seydi"};
-	
-	JList<String> playerList = new JList<String>(players);
-	JScrollPane scrollPane = new JScrollPane(playerList);
-	JButton selectButton = new JButton("Személy választása");
-	
+	JList<String> playerList;
+	JScrollPane scrollPane;
+	JButton selectButton;
+	XML xml;
+        
 	public PlayerSelectorPanel(Dimension size) {
+                xml = new XML();
+                players = XML.homeTeam.players.toArray(new String[XML.homeTeam.players.size()]);
+                playerList = new JList<String>(players);
+                scrollPane = new JScrollPane(playerList);
+                selectButton = new JButton("Személy választása");
+
 		setBackground(new Color(243,244,247));
 
 		BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);

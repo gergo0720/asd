@@ -1,3 +1,5 @@
+package reccos.futball.hirszerzo.c.business;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
@@ -9,13 +11,9 @@ import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URISyntaxException;
 import java.util.Vector;
  
 public class XML {
@@ -141,7 +139,7 @@ public class XML {
 	public static String competitionRefid;
 
 
-	XML()
+	public XML()
 	{	
 		referee = new Vector<String>();
 		XML.homeTeam homeTeam = new XML.homeTeam();
@@ -153,7 +151,7 @@ public class XML {
 	   
 	    try 
 	    {
-				inputStream = getClass().getResourceAsStream("/match.xml");
+                inputStream = getClass().getResourceAsStream("/match.xml");
 			
 	    	
 	    	InputStreamReader input = new InputStreamReader(inputStream);
@@ -221,7 +219,6 @@ public class XML {
 		XML.homeTeam.coachName = "Garami József";
 		XML.homeTeam.coachRefid = "123456";
 		XML.homeTeam.coach.add(XML.homeTeam.coachName);
-
     	NodeList list= doc.getElementsByTagName("player");
     	int playerCounter = 0;
 

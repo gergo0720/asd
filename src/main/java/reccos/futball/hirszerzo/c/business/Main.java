@@ -11,7 +11,7 @@ public class Main extends JDesktopPane{
 			public void run() {
                             
                             try {
-                                Thread.sleep(3000);
+                                Thread.sleep(3200);
                             } catch(Exception e) {
                                 
                             }
