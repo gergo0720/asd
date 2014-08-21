@@ -14,10 +14,12 @@ import java.beans.PropertyChangeListener;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 
 import reccos.futball.hirszerzo.c.userinterface.LoginPanel;
 import reccos.futball.hirszerzo.c.userinterface.RegisterPanel;
 import reccos.futball.hirszerzo.c.userinterface.WatchPanel;
+import reccos.futball.hirszerzo.c.userinterface.WelcomePanel;
 
 
 public class ReccosC extends JFrame {
@@ -25,6 +27,7 @@ public class ReccosC extends JFrame {
 	LoginPanel loginPanel;
 	WatchPanel watchPanel;
 	RegisterPanel registerPanel;
+        WelcomePanel welcome;
 	
 	public ReccosC() {
 		setupGUI();
@@ -41,14 +44,15 @@ public class ReccosC extends JFrame {
 		
 		requestFocusInWindow();
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setSize(340, 440);
+		setSize(400, 540);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setTitle("Futball hírszerző");
+                
 		watchPanel = new WatchPanel(getSize());
 		loginPanel = new LoginPanel();
 		registerPanel = new RegisterPanel(getSize());
-		add(loginPanel);
+                welcome = new WelcomePanel(loginPanel, registerPanel, this);
 	}
 	
 	private void addListeners(){

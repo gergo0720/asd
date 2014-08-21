@@ -19,7 +19,9 @@ import javax.swing.border.EmptyBorder;
 
 public class LoginPanel extends JPanel {
 	
+        public JLabel emailLabel = new JLabel("E-mail cím");
 	public JTextField userNameField = new JTextField("E-mail cím");
+        public JLabel passwordLabel = new JLabel("Jelszó");
 	public JPasswordField passwordField = new JPasswordField("Jelszó");
 	public JButton loginButton = new JButton("Bejelentkezés");
 	public JButton registerButton = new JButton("Regisztráció");
@@ -49,19 +51,24 @@ public class LoginPanel extends JPanel {
 		}catch (IllegalArgumentException e) {
 			imagePanel.setPreferredSize(new Dimension(getSize().width, 300));
 		}
-		textPanel.setBorder(new EmptyBorder(0,15,0,15));
+		
+                userNameField.setPreferredSize(new Dimension(80,20));
+                passwordField.setPreferredSize(new Dimension(80,20));
+                textPanel.setBorder(new EmptyBorder(0,15,0,15));
 		textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
+                textPanel.add(emailLabel);
 		textPanel.add(userNameField);
+                textPanel.add(passwordLabel);
 		textPanel.add(passwordField);		
 		buttonPanel.add(loginButton);
-		buttonPanel.add(registerButton);
+		//buttonPanel.add(registerButton);
 		
 		otherPanel.setLayout(new BoxLayout(otherPanel, BoxLayout.Y_AXIS));
 		otherPanel.setBorder(new EmptyBorder(0, 20, 10, 20));
 		otherPanel.add(textPanel);
 		otherPanel.add(buttonPanel);
 		
-		add(imagePanel);
+		//add(imagePanel);
 		add(otherPanel);
 	}
 	

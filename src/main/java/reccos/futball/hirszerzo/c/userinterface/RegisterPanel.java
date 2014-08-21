@@ -69,20 +69,20 @@ public class RegisterPanel extends JPanel {
 		c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 10;
 
-		textPanel.add(email,c);
-		
-		c.gridy = 1;
-		textPanel.add(pwField,c);
-		
-		c.gridy = 2;
-		textPanel.add(pwAgain,c);
-		
-		
-		c = new GridBagConstraints();
-		c.gridheight = 2;
-		c.gridwidth = 2;
+        textPanel.add(email,c);
 
-		c.weightx = 1; 
+        c.gridy = 1;
+        textPanel.add(pwField,c);
+
+        c.gridy = 2;
+        textPanel.add(pwAgain,c);
+
+
+        c = new GridBagConstraints();
+        c.gridheight = 2;
+        c.gridwidth = 2;
+
+        c.weightx = 1; 
         c.weighty = 1;   
 
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -117,7 +117,7 @@ public class RegisterPanel extends JPanel {
 	    c.weightx = 0.0;   
 		datePanel.add(dayBox,    c);
 		
-		buttonPanel.add(backButton);
+		//buttonPanel.add(backButton);
 		buttonPanel.add(registerButton);
 		
 		
