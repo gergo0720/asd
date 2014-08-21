@@ -1,8 +1,12 @@
 package reccos.futball.hirszerzo.c.userinterface;
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
@@ -12,6 +16,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -51,10 +56,25 @@ public class RegisterPanel extends JPanel {
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		setupGUI();
 	}
+        
+        public void paintComponent(Graphics g) {
+            Graphics2D g2d = (Graphics2D) g;
+            AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
+            g2d.setComposite(composite);
+            ImageIcon imageicon = new ImageIcon(getClass().getResource("/logo300x300.png"));
+            Image image = imageicon.getImage();
+            super.paintComponent(g2d);
+            
+            if(image != null) {
+                g2d.drawImage(image, getWidth()/2-150, getHeight()/2-150, 300, 300, this);
+            }
+            setRequestFocuses();
+        } 
 	
 	private void setupGUI(){
-		setupComboBoxes();
-		setupTextFields();
+                
+                setupComboBoxes();
+                setupTextFields();
 		textPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
 		textPanel.setLayout(new GridBagLayout());
 		sexPanel.setBorder(new EmptyBorder(10, 20, 0, 20));
@@ -66,23 +86,23 @@ public class RegisterPanel extends JPanel {
 		GridBagConstraints c = new GridBagConstraints();
         c.weightx = 1;   
         c.weighty = 1;
-		c.fill = GridBagConstraints.HORIZONTAL;
+        c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 10;
 
-		textPanel.add(email,c);
-		
-		c.gridy = 1;
-		textPanel.add(pwField,c);
-		
-		c.gridy = 2;
-		textPanel.add(pwAgain,c);
-		
-		
-		c = new GridBagConstraints();
-		c.gridheight = 2;
-		c.gridwidth = 2;
+        textPanel.add(email,c);
 
-		c.weightx = 1; 
+        c.gridy = 1;
+        textPanel.add(pwField,c);
+
+        c.gridy = 2;
+        textPanel.add(pwAgain,c);
+
+
+        c = new GridBagConstraints();
+        c.gridheight = 2;
+        c.gridwidth = 2;
+
+        c.weightx = 1; 
         c.weighty = 1;   
 
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -117,7 +137,7 @@ public class RegisterPanel extends JPanel {
 	    c.weightx = 0.0;   
 		datePanel.add(dayBox,    c);
 		
-		buttonPanel.add(backButton);
+		//buttonPanel.add(backButton);
 		buttonPanel.add(registerButton);
 		
 		
@@ -128,18 +148,32 @@ public class RegisterPanel extends JPanel {
 		add(sexPanel);
 		add(datePanel);
 		add(buttonPanel);
+                
+                
 	}
 	
+        private void setRequestFocuses() {
+            email.requestFocusInWindow();
+            pwField.requestFocusInWindow();
+            pwAgain.requestFocusInWindow();
+            sexLabel.requestFocusInWindow();
+            dateLabel.requestFocusInWindow();
+            yearBox.requestFocusInWindow();
+            monthBox.requestFocusInWindow();
+            dayBox.requestFocusInWindow();
+            registerButton.requestFocusInWindow();
+        }
+        
 	private void setupTextFields(){
-		email.requestFocusInWindow();
-		email.selectAll();
+		//email.requestFocusInWindow();
+		//email.selectAll();
 		email.addFocusListener(new FocusListener() {
             public void focusLost(final FocusEvent pE) {
-            	email.select(0, 0);
+            	//email.select(0, 0);
             }
             public void focusGained(final FocusEvent pE) {
-            	email.selectAll();
-            	email.setBackground(Color.WHITE);
+            	//email.selectAll();
+            	//email.setBackground(Color.WHITE);
             }
         });
 		
@@ -270,6 +304,8 @@ public class RegisterPanel extends JPanel {
 		pwAgain.setBackground(Color.white);
 		return true;
 	}
+        
+        
 	
 	public String getEmail(){
 		return email.getText();

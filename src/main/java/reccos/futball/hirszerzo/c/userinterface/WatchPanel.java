@@ -5,9 +5,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
 import javax.swing.JPanel;
-
 import reccos.futball.hirszerzo.c.business.JabberSmackApi;
 
 
