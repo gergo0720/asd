@@ -2,11 +2,13 @@ package reccos.futball.hirszerzo.c.userinterface;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ItemEvent;
@@ -34,8 +36,12 @@ public class RegisterPanel extends JPanel {
 	JPanel datePanel = new JPanel();
 	JPanel buttonPanel  = new JPanel();
 	
+        public JLabel robom = new JLabel("Futball-Hírszerző");
+        public JLabel emailLabel = new JLabel("E-mail cím");
 	public JTextField email = new JTextField("E-mail cím");
+        public JLabel pwLabel = new JLabel("Jelszó");
 	JPasswordField pwField = new JPasswordField("Jelszó");
+        public JLabel pwAgainLabel = new JLabel("Jelszó");
 	JPasswordField pwAgain = new JPasswordField("Jelszó mégegyszer");
 	
 	JLabel sexLabel = new JLabel("Nem");
@@ -59,121 +65,221 @@ public class RegisterPanel extends JPanel {
         
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
-            AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
-            g2d.setComposite(composite);
-            ImageIcon imageicon = new ImageIcon(getClass().getResource("/logo300x300.png"));
+            ImageIcon imageicon = new ImageIcon(getClass().getResource("/logo300x300op.png"));
             Image image = imageicon.getImage();
             super.paintComponent(g2d);
             
             if(image != null) {
                 g2d.drawImage(image, getWidth()/2-150, getHeight()/2-150, 300, 300, this);
             }
-            setRequestFocuses();
         } 
 	
 	private void setupGUI(){
                 
                 setupComboBoxes();
                 setupTextFields();
-		textPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-		textPanel.setLayout(new GridBagLayout());
-		sexPanel.setBorder(new EmptyBorder(10, 20, 0, 20));
-		sexPanel.setLayout(new GridBagLayout());
-		datePanel.setBorder(new EmptyBorder(0, 20, 20, 20));
-		datePanel.setLayout(new GridBagLayout());
-
-		
-		GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 1;   
-        c.weighty = 1;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 10;
-
-        textPanel.add(email,c);
-
-        c.gridy = 1;
-        textPanel.add(pwField,c);
-
-        c.gridy = 2;
-        textPanel.add(pwAgain,c);
-
-
-        c = new GridBagConstraints();
-        c.gridheight = 2;
-        c.gridwidth = 2;
-
-        c.weightx = 1; 
-        c.weighty = 1;   
-
-		c.fill = GridBagConstraints.HORIZONTAL;
-        c.anchor = GridBagConstraints.PAGE_START;
-		sexPanel.add(sexLabel, c);
-		c.weightx = 0.0; 
-		c.gridy = 2;
-
-		sexPanel.add(isMale,   c);
-		c.weightx = 1; 
-
-
-		sexPanel.add(isFemale, c);
-		
-		c = new GridBagConstraints();
-		c.fill = GridBagConstraints.HORIZONTAL;
-        c.anchor = GridBagConstraints.PAGE_START;
-        c.ipady = 20;
-		c.gridheight = 2;
-		c.gridwidth = 3;
-		datePanel.add(dateLabel, c);
-        c.ipady = 0;
-
-		c.gridy = 2;
-	    c.weightx = 0.0;   
-	    c.weighty = 1;   
-		datePanel.add(yearBox,   c);
-		
-		c.weightx = 0.5;   
-		datePanel.add(monthBox,  c);
-    
-	    c.weightx = 0.0;   
-		datePanel.add(dayBox,    c);
-		
-		//buttonPanel.add(backButton);
-		buttonPanel.add(registerButton);
-		
-		
-		sexGroup.add(isMale);
-		sexGroup.add(isFemale);
-		
-		add(textPanel);
-		add(sexPanel);
-		add(datePanel);
-		add(buttonPanel);
+                
+                setLayout(new GridBagLayout());
+                GridBagConstraints gc = new GridBagConstraints();
+                
+                gc.fill = GridBagConstraints.HORIZONTAL;
+                
+                gc.insets = new Insets(20, 35, 30, 0);
+                gc.gridx = 0;
+                gc.gridy = 0;
+                gc.weightx = 0.2;
+                gc.gridwidth = 2;
+                robom.setFont(new Font("Arial", Font.PLAIN, 42));
+                add(robom, gc);
+                
+                gc.insets = new Insets(20, 30, 0, 0);
+                gc.gridx = 0;
+                gc.gridy = 1;
+                gc.gridwidth = 1;
+                add(emailLabel, gc);
+                
+                gc.insets = new Insets(20, 0, 0, 30);
+                gc.gridx = 1;
+                gc.gridy = 1;
+                gc.gridwidth = 1;
+                email.setPreferredSize(new Dimension(150,50));
+                add(email, gc);
+                
+                gc.insets = new Insets(20, 30, 0, 0);
+                gc.gridx = 0;
+                gc.gridy = 2;
+                gc.gridwidth = 1;
+                add(pwLabel, gc);
+                
+                gc.insets = new Insets(20, 0, 0, 30);
+                gc.gridx = 1;
+                gc.gridy = 2;
+                gc.gridwidth = 1;
+                pwField.setPreferredSize(new Dimension(150,30));
+                add(pwField, gc);
+                
+                gc.insets = new Insets(20, 30, 0, 0);
+                gc.gridx = 0;
+                gc.gridy = 3;
+                gc.gridwidth = 1;
+                add(pwAgainLabel, gc);
+                
+                gc.insets = new Insets(20, 0, 0, 30);
+                gc.gridx = 1;
+                gc.gridy = 3;
+                gc.gridwidth = 1;
+                pwAgain.setPreferredSize(new Dimension(150,30));
+                add(pwAgain, gc);
+                
+                gc.insets = new Insets(20, 30, 0, 0);
+                gc.weightx = 0.5;
+                gc.gridx = 0;
+                gc.gridy = 4;
+                gc.gridwidth = 1;
+                add(sexLabel, gc);
+                
+                gc.insets = new Insets(20, 0, 0, 150);
+                gc.weightx = 0.2;
+                gc.gridx = 1;
+                gc.gridy = 4;
+                gc.gridwidth = 1;
+                //isFemale.setPreferredSize(new Dimension(250,30));
+                add(isFemale, gc);
+                
+                gc.insets = new Insets(10, 0, 0, 150);
+                gc.weightx = 0.2;
+                gc.gridx = 1;
+                gc.gridy = 5;
+                gc.gridwidth = 1;
+                //isFemale.setPreferredSize(new Dimension(250,30));
+                add(isMale, gc);
+                
+                gc.insets = new Insets(20, 30, 0, 0);
+                gc.weightx = 0.5;
+                gc.gridx = 0;
+                gc.gridy = 6;
+                gc.gridwidth = 1;
+                add(dateLabel, gc);
+                
+                gc.insets = new Insets(20, 0, 0, 150);
+                gc.weightx = 0.2;
+                gc.gridx = 1;
+                gc.gridy = 6;
+                gc.gridwidth = 1;
+                //isFemale.setPreferredSize(new Dimension(250,30));
+                add(yearBox, gc);
+                
+                gc.insets = new Insets(10, 0, 0, 150);
+                gc.weightx = 0.2;
+                gc.gridx = 1;
+                gc.gridy = 7;
+                gc.gridwidth = 1;
+                //isFemale.setPreferredSize(new Dimension(250,30));
+                add(monthBox, gc);
+                
+                gc.insets = new Insets(10, 0, 0, 150);
+                gc.weightx = 0.2;
+                gc.gridx = 1;
+                gc.gridy = 8;
+                gc.gridwidth = 1;
+                //isFemale.setPreferredSize(new Dimension(250,30));
+                add(dayBox, gc);
                 
                 
+                gc.insets = new Insets(20, 30, 0, 30);
+                gc.gridx = 0;
+                gc.gridy = 9;
+                gc.gridwidth = 2;
+                registerButton.setPreferredSize(new Dimension(320,30));
+                add(registerButton, gc);
+                
+//		textPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+//		textPanel.setLayout(new GridBagLayout());
+//		sexPanel.setBorder(new EmptyBorder(10, 20, 0, 20));
+//		sexPanel.setLayout(new GridBagLayout());
+//		datePanel.setBorder(new EmptyBorder(0, 20, 20, 20));
+//		datePanel.setLayout(new GridBagLayout());
+//
+//		
+//		GridBagConstraints c = new GridBagConstraints();
+//        c.weightx = 1;   
+//        c.weighty = 1;
+//        c.fill = GridBagConstraints.HORIZONTAL;
+//        c.ipady = 10;
+//
+//        textPanel.add(email,c);
+//
+//        c.gridy = 1;
+//        textPanel.add(pwField,c);
+//
+//        c.gridy = 2;
+//        textPanel.add(pwAgain,c);
+//
+//
+//        c = new GridBagConstraints();
+//        c.gridheight = 2;
+//        c.gridwidth = 2;
+//
+//        c.weightx = 1; 
+//        c.weighty = 1;   
+//
+//		c.fill = GridBagConstraints.HORIZONTAL;
+//        c.anchor = GridBagConstraints.PAGE_START;
+//		sexPanel.add(sexLabel, c);
+//		c.weightx = 0.0; 
+//		c.gridy = 2;
+//
+//		sexPanel.add(isMale,   c);
+//		c.weightx = 1; 
+//
+//
+//		sexPanel.add(isFemale, c);
+//		
+//		c = new GridBagConstraints();
+//		c.fill = GridBagConstraints.HORIZONTAL;
+//        c.anchor = GridBagConstraints.PAGE_START;
+//        c.ipady = 20;
+//		c.gridheight = 2;
+//		c.gridwidth = 3;
+//		datePanel.add(dateLabel, c);
+//        c.ipady = 0;
+//
+//		c.gridy = 2;
+//	    c.weightx = 0.0;   
+//	    c.weighty = 1;   
+//		datePanel.add(yearBox,   c);
+//		
+//		c.weightx = 0.5;   
+//		datePanel.add(monthBox,  c);
+//    
+//	    c.weightx = 0.0;   
+//		datePanel.add(dayBox,    c);
+//		
+//		//buttonPanel.add(backButton);
+//		buttonPanel.add(registerButton);
+//		
+//		
+//		sexGroup.add(isMale);
+//		sexGroup.add(isFemale);
+//		
+//		add(textPanel);
+//		add(sexPanel);
+//		add(datePanel);
+//		add(buttonPanel);
+//                
+//                
 	}
-	
-        private void setRequestFocuses() {
-            email.requestFocusInWindow();
-            pwField.requestFocusInWindow();
-            pwAgain.requestFocusInWindow();
-            sexLabel.requestFocusInWindow();
-            dateLabel.requestFocusInWindow();
-            yearBox.requestFocusInWindow();
-            monthBox.requestFocusInWindow();
-            dayBox.requestFocusInWindow();
-            registerButton.requestFocusInWindow();
-        }
         
 	private void setupTextFields(){
-		//email.requestFocusInWindow();
-		//email.selectAll();
+		email.requestFocusInWindow();
+		email.selectAll();
 		email.addFocusListener(new FocusListener() {
             public void focusLost(final FocusEvent pE) {
-            	//email.select(0, 0);
+            	email.select(0, 0);
             }
             public void focusGained(final FocusEvent pE) {
-            	//email.selectAll();
-            	//email.setBackground(Color.WHITE);
+            	email.selectAll();
+                email.setBackground(Color.WHITE);
             }
         });
 		

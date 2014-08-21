@@ -2,11 +2,13 @@ package reccos.futball.hirszerzo.c.userinterface;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -28,14 +30,13 @@ import javax.swing.border.EmptyBorder;
 
 public class LoginPanel extends JPanel {
 	
+        public JLabel robom = new JLabel("Futball-Hírszerző");
         public JLabel emailLabel = new JLabel("E-mail cím");
 	public JTextField userNameField = new JTextField("E-mail cím");
         public JLabel passwordLabel = new JLabel("Jelszó");
 	public JPasswordField passwordField = new JPasswordField("Jelszó");
 	public JButton loginButton = new JButton("Bejelentkezés");
 	public JButton registerButton = new JButton("Regisztráció");
-	public static JButton b = new JButton("ASD");
-        public static JButton b2 = new JButton("ASD2");
 	
 	public LoginPanel() {
                 super();
@@ -45,31 +46,56 @@ public class LoginPanel extends JPanel {
 		setupListeners();
 	}
         
+        @Override
         public void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
-            AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
-            g2d.setComposite(composite);
-            ImageIcon imageicon = new ImageIcon(getClass().getResource("/logo300x300.png"));
+            ImageIcon imageicon = new ImageIcon(getClass().getResource("/logo300x300op.png"));
             Image image = imageicon.getImage();
             super.paintComponent(g2d);
             
             if(image != null) {
                 g2d.drawImage(image, getWidth()/2-150, getHeight()/2-150, 300, 300, this);
             }
-            add(b);
-            add(b2);
-            b.requestFocusInWindow();
-            b2.requestFocusInWindow();
         }
         
         
         
 	private void setupGUI() {
             setLayout(new GridBagLayout());
-            GridBagConstraints grid = new GridBagConstraints();
+            GridBagConstraints gc = new GridBagConstraints();
             
+            gc.gridx = 0;
+            gc.gridy = 0;
+            robom.setFont(new Font("Arial", Font.PLAIN, 42));
+            add(robom, gc);
             
+            gc.insets = new Insets(120, 0, 0, 260);
+            gc.gridx = 0;
+            gc.gridy = 1;
+            add(emailLabel, gc);
             
+            gc.insets = new Insets(5, 0, 0, 0);
+            gc.gridx = 0;
+            gc.gridy = 2;
+            gc.weightx = 1;   
+            userNameField.setPreferredSize(new Dimension(320,30));
+            add(userNameField, gc);
+            
+            gc.insets = new Insets(20, 0, 0, 283);
+            gc.gridx = 0;
+            gc.gridy = 3;
+            add(passwordLabel, gc);
+            
+            gc.insets = new Insets(5, 0, 50, 0);
+            gc.gridx = 0;
+            gc.gridy = 4;
+            passwordField.setPreferredSize(new Dimension(320,30));
+            add(passwordField, gc);
+            
+            gc.gridx = 0;
+            gc.gridy = 5;
+            loginButton.setPreferredSize(new Dimension(320,30));
+            add(loginButton, gc);
         }
         
         

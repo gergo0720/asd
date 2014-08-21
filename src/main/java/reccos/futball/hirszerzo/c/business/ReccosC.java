@@ -10,6 +10,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -39,7 +40,7 @@ public class ReccosC extends JFrame {
 		try{
 			Image icon = ImageIO.read(getClass().getResourceAsStream("/logo100x100.png"));
 			setIconImage(icon);	
-		}catch(Exception e){
+		}catch(IOException e){
 		}
 		
 		requestFocusInWindow();
@@ -76,12 +77,14 @@ public class ReccosC extends JFrame {
 		});
 		
 		loginPanel.loginButton.addActionListener(new ActionListener() {
+                        @Override
 			public void actionPerformed(ActionEvent e) {
 				login();
 			}
 		});
 		
 		loginPanel.registerButton.addActionListener(new ActionListener() {
+                        @Override
 			public void actionPerformed(ActionEvent e) {
 				remove(loginPanel);
 				add(registerPanel);
@@ -91,6 +94,7 @@ public class ReccosC extends JFrame {
 		});
 		
 		registerPanel.backButton.addActionListener(new ActionListener() {
+                        @Override
 			public void actionPerformed(ActionEvent e) {
 				remove(registerPanel);
 				add(loginPanel);
@@ -100,6 +104,7 @@ public class ReccosC extends JFrame {
 		});
 		
 		registerPanel.registerButton.addActionListener(new ActionListener() {
+                        @Override
 			public void actionPerformed(ActionEvent e) {
 				register();
 			}
@@ -107,6 +112,7 @@ public class ReccosC extends JFrame {
 		
 		watchPanel.addPropertyChangeListener("back", new PropertyChangeListener() {
 			
+                        @Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				remove(watchPanel);
 				add(loginPanel);
@@ -125,9 +131,10 @@ public class ReccosC extends JFrame {
 				loginPanel.getPassword(),
 				new PropertyChangeListener() {
 			
+                        @Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				if(evt.getPropertyName().compareTo("login") == 0 && (Boolean) evt.getNewValue() == true){
-					remove(loginPanel);
+					getContentPane().removeAll();
 					add(watchPanel);
 					validate();
 					repaint();
@@ -150,6 +157,7 @@ public class ReccosC extends JFrame {
                     registerPanel.getDay(),
                     new PropertyChangeListener() {
 			
+                        @Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				if(evt.getNewValue().toString().compareTo("success")==0 ){
 					remove(registerPanel);
