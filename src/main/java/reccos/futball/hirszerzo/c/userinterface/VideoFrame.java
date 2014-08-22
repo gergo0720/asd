@@ -16,16 +16,25 @@ import uk.co.caprica.vlcj.component.EmbeddedMediaListPlayerComponent;
 public class VideoFrame extends JFrame {
     
     private final EmbeddedMediaListPlayerComponent mediaPlayerComponent;
-    
+    JFrame frame = null;
     public VideoFrame(JFrame f) {
+        setLocation(0,0);
+        setSize(800,600);
+        
+        
         mediaPlayerComponent = new EmbeddedMediaListPlayerComponent();
         
-        f.setContentPane(mediaPlayerComponent);
+        setContentPane(mediaPlayerComponent);
+        setVisible(true);
         
-        f.setLocation(0, 0);
-        f.setSize(800,600);
         
         mediaPlayerComponent.getMediaPlayer().playMedia("C:\\Users\\koverg\\Downloads\\Helicopter_DivXHT_ASP.divx");
+        setFrame(f);
+    }
+    
+    private void setFrame(JFrame frame) {
+        frame.add(this);
     }
     
 }
+
