@@ -25,7 +25,7 @@ public class VideoFrame extends JFrame {
         f.setLocation(0, 0);
         f.setSize(800,600);
         
-        mediaPlayerComponent.getMediaPlayer().playMedia(null);
+        mediaPlayerComponent.getMediaPlayer().playMedia("C:\\Users\\koverg\\Downloads\\Helicopter_DivXHT_ASP.divx");
     }
     
 }
