@@ -19,6 +19,7 @@ import javax.swing.JTabbedPane;
 
 import reccos.futball.hirszerzo.c.userinterface.LoginPanel;
 import reccos.futball.hirszerzo.c.userinterface.RegisterPanel;
+import reccos.futball.hirszerzo.c.userinterface.VideoFrame;
 import reccos.futball.hirszerzo.c.userinterface.WatchPanel;
 import reccos.futball.hirszerzo.c.userinterface.WelcomePanel;
 
@@ -29,6 +30,7 @@ public class ReccosC extends JFrame {
 	WatchPanel watchPanel;
 	RegisterPanel registerPanel;
         WelcomePanel welcome;
+        JFrame frame;
 	
 	public ReccosC() {
 		setupGUI();
@@ -36,7 +38,7 @@ public class ReccosC extends JFrame {
 	}
 	
 	private void setupGUI(){
-		
+		frame = this;
 		try{
 			Image icon = ImageIO.read(getClass().getResourceAsStream("/logo100x100.png"));
 			setIconImage(icon);	
@@ -135,7 +137,9 @@ public class ReccosC extends JFrame {
 			public void propertyChange(PropertyChangeEvent evt) {
 				if(evt.getPropertyName().compareTo("login") == 0 && (Boolean) evt.getNewValue() == true){
 					getContentPane().removeAll();
-					add(watchPanel);
+					setSize(1050,600);
+                                        setLocationRelativeTo(null);
+                                        VideoFrame vf = new VideoFrame(frame);
 					validate();
 					repaint();
 				}
