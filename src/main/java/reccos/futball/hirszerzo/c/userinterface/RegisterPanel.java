@@ -1,8 +1,6 @@
 package reccos.futball.hirszerzo.c.userinterface;
-import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
@@ -41,7 +39,7 @@ public class RegisterPanel extends JPanel {
 	public JTextField email = new JTextField("E-mail cím");
         public JLabel pwLabel = new JLabel("Jelszó");
 	JPasswordField pwField = new JPasswordField("Jelszó");
-        public JLabel pwAgainLabel = new JLabel("Jelszó");
+        public JLabel pwAgainLabel = new JLabel("Jelszó mégegyszer");
 	JPasswordField pwAgain = new JPasswordField("Jelszó mégegyszer");
 	
 	JLabel sexLabel = new JLabel("Nem");
@@ -82,114 +80,97 @@ public class RegisterPanel extends JPanel {
                 setLayout(new GridBagLayout());
                 GridBagConstraints gc = new GridBagConstraints();
                 
-                gc.fill = GridBagConstraints.HORIZONTAL;
+               
+//                gc.gridx = 0;
+//                gc.gridy = 0;
+//                robom.setFont(new Font("Arial", Font.PLAIN, 42));
+//                add(robom, gc);
                 
-                gc.insets = new Insets(20, 35, 30, 0);
+                gc.insets = new Insets(20, 0, 0, 260);
                 gc.gridx = 0;
-                gc.gridy = 0;
-                gc.weightx = 0.2;
-                gc.gridwidth = 2;
-                robom.setFont(new Font("Arial", Font.PLAIN, 42));
-                add(robom, gc);
-                
-                gc.insets = new Insets(20, 30, 0, 0);
-                gc.gridx = 0;
-                gc.gridy = 1;
-                gc.gridwidth = 1;
+                gc.gridy = 2;
                 add(emailLabel, gc);
                 
-                gc.insets = new Insets(20, 0, 0, 30);
-                gc.gridx = 1;
-                gc.gridy = 1;
-                gc.gridwidth = 1;
-                email.setPreferredSize(new Dimension(150,50));
+                gc.insets = new Insets(5, 0, 0, 0);
+                gc.gridx = 0;
+                gc.gridy = 3;
+                email.setPreferredSize(new Dimension(320,30));
                 add(email, gc);
                 
-                gc.insets = new Insets(20, 30, 0, 0);
+                gc.insets = new Insets(20, 0, 0, 282);
                 gc.gridx = 0;
-                gc.gridy = 2;
-                gc.gridwidth = 1;
+                gc.gridy = 4;
                 add(pwLabel, gc);
                 
-                gc.insets = new Insets(20, 0, 0, 30);
-                gc.gridx = 1;
-                gc.gridy = 2;
-                gc.gridwidth = 1;
-                pwField.setPreferredSize(new Dimension(150,30));
+                gc.insets = new Insets(5, 0, 0, 0);
+                gc.gridx = 0;
+                gc.gridy = 5;
+                pwField.setPreferredSize(new Dimension(320,30));
                 add(pwField, gc);
                 
-                gc.insets = new Insets(20, 30, 0, 0);
+                gc.insets = new Insets(20, 9, 0, 220);
                 gc.gridx = 0;
-                gc.gridy = 3;
-                gc.gridwidth = 1;
+                gc.gridy = 6;
                 add(pwAgainLabel, gc);
                 
-                gc.insets = new Insets(20, 0, 0, 30);
-                gc.gridx = 1;
-                gc.gridy = 3;
-                gc.gridwidth = 1;
-                pwAgain.setPreferredSize(new Dimension(150,30));
+                gc.insets = new Insets(5, 0, 0, 0);
+                gc.gridx = 0;
+                gc.gridy = 7;
+                pwAgain.setPreferredSize(new Dimension(320,30));
                 add(pwAgain, gc);
                 
-                gc.insets = new Insets(20, 30, 0, 0);
-                gc.weightx = 0.5;
+                gc.insets = new Insets(20, 0, 0, 294);
                 gc.gridx = 0;
-                gc.gridy = 4;
-                gc.gridwidth = 1;
+                gc.gridy = 8;
                 add(sexLabel, gc);
                 
-                gc.insets = new Insets(20, 0, 0, 150);
+                sexGroup.add(isFemale);
+                sexGroup.add(isMale);
+                
+                gc.insets = new Insets(5, 0, 0, 290);
                 gc.weightx = 0.2;
-                gc.gridx = 1;
-                gc.gridy = 4;
-                gc.gridwidth = 1;
-                //isFemale.setPreferredSize(new Dimension(250,30));
+                gc.gridx = 0;
+                gc.gridy = 9;
                 add(isFemale, gc);
                 
-                gc.insets = new Insets(10, 0, 0, 150);
-                gc.weightx = 0.2;
-                gc.gridx = 1;
-                gc.gridy = 5;
-                gc.gridwidth = 1;
-                //isFemale.setPreferredSize(new Dimension(250,30));
+                gc.insets = new Insets(5, 0, 0, 200);
+                gc.gridx = 0;
+                gc.gridy = 9;
                 add(isMale, gc);
                 
-                gc.insets = new Insets(20, 30, 0, 0);
-                gc.weightx = 0.5;
+                gc.insets = new Insets(20, 0, 0, 234);
                 gc.gridx = 0;
-                gc.gridy = 6;
-                gc.gridwidth = 1;
+                gc.gridy = 10;
                 add(dateLabel, gc);
                 
-                gc.insets = new Insets(20, 0, 0, 150);
+                gc.insets = new Insets(5, 0, 0, 265);
                 gc.weightx = 0.2;
-                gc.gridx = 1;
-                gc.gridy = 6;
-                gc.gridwidth = 1;
+                gc.gridx = 0;
+                gc.gridy = 11;
+                
                 //isFemale.setPreferredSize(new Dimension(250,30));
                 add(yearBox, gc);
                 
-                gc.insets = new Insets(10, 0, 0, 150);
+                gc.insets = new Insets(5, 0, 0, 115);
                 gc.weightx = 0.2;
-                gc.gridx = 1;
-                gc.gridy = 7;
-                gc.gridwidth = 1;
+                gc.gridx = 0;
+                gc.gridy = 11;
+               
                 //isFemale.setPreferredSize(new Dimension(250,30));
                 add(monthBox, gc);
                 
-                gc.insets = new Insets(10, 0, 0, 150);
+                gc.insets = new Insets(5, 20, 0, 0);
                 gc.weightx = 0.2;
-                gc.gridx = 1;
-                gc.gridy = 8;
-                gc.gridwidth = 1;
+                gc.gridx = 0;
+                gc.gridy = 11;
+                
                 //isFemale.setPreferredSize(new Dimension(250,30));
                 add(dayBox, gc);
                 
                 
-                gc.insets = new Insets(20, 30, 0, 30);
+                gc.insets = new Insets(20, 0, 0, 0);
                 gc.gridx = 0;
-                gc.gridy = 9;
-                gc.gridwidth = 2;
+                gc.gridy = 12;
                 registerButton.setPreferredSize(new Dimension(320,30));
                 add(registerButton, gc);
                 
@@ -385,6 +366,7 @@ public class RegisterPanel extends JPanel {
 	    	  JOptionPane.showMessageDialog(null, "Kérem adjon meg egy érvényes e-mail címet!");
 	    	  return false;
 	      }
+              System.out.println("AS2");
 	      return m.matches();
 	}
 	
@@ -395,19 +377,23 @@ public class RegisterPanel extends JPanel {
 		if(pwField.getEchoChar() == (char)0 || pwAgain.getEchoChar() == (char)0){
 			pwField.setBackground(Color.red);
 			JOptionPane.showMessageDialog(null, "Kérem adjon meg egy érvényes jelszót!");
+                        System.out.println("jelszó");
 			return false;
 		}
 		if(first.compareTo(second) != 0){
 			pwAgain.setBackground(Color.red);
 			JOptionPane.showMessageDialog(null, "A jelszók nem egyeznek!");
+                        System.out.println("jelszó !=");
 			return false;
 		}
 		if(first.length() < 4){
 			pwField.setBackground(Color.red);
 			JOptionPane.showMessageDialog(null, "A jelszónak legalább 4 karakterből kell állnia!");
+                        System.out.println("jelszó 4");
 			return false;
 		}
 		pwAgain.setBackground(Color.white);
+                System.out.println("pw");
 		return true;
 	}
         

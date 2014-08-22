@@ -59,7 +59,7 @@ public class ReccosC extends JFrame {
 	private void addListeners(){
 		
 		addWindowListener(new WindowAdapter() {
-			@Override
+			
 			public void windowClosing(WindowEvent e) {
 				super.windowClosing(e);
 				JabberSmackApi.getInstance().disconnect();
@@ -69,7 +69,7 @@ public class ReccosC extends JFrame {
 		});
 		
 		addComponentListener(new ComponentAdapter() {
-			@Override
+			
 			public void componentResized(ComponentEvent e) {
 				super.componentResized(e);
 				watchPanel.setPreferredSize(getSize());
@@ -77,31 +77,31 @@ public class ReccosC extends JFrame {
 		});
 		
 		loginPanel.loginButton.addActionListener(new ActionListener() {
-                        @Override
+                        
 			public void actionPerformed(ActionEvent e) {
 				login();
 			}
 		});
 		
-		loginPanel.registerButton.addActionListener(new ActionListener() {
-                        @Override
-			public void actionPerformed(ActionEvent e) {
-				remove(loginPanel);
-				add(registerPanel);
-				validate();
-				repaint();
-			}
-		});
+//		loginPanel.registerButton.addActionListener(new ActionListener() {
+//                        
+//			public void actionPerformed(ActionEvent e) {
+//				remove(loginPanel);
+//				add(registerPanel);
+//				validate();
+//				repaint();
+//			}
+//		});
 		
-		registerPanel.backButton.addActionListener(new ActionListener() {
-                        @Override
-			public void actionPerformed(ActionEvent e) {
-				remove(registerPanel);
-				add(loginPanel);
-				validate();
-				repaint();
-			}
-		});
+//		registerPanel.backButton.addActionListener(new ActionListener() {
+//                        @Override
+//			public void actionPerformed(ActionEvent e) {
+//				remove(registerPanel);
+//				add(loginPanel);
+//				validate();
+//				repaint();
+//			}
+//		});
 		
 		registerPanel.registerButton.addActionListener(new ActionListener() {
                         @Override
@@ -131,7 +131,7 @@ public class ReccosC extends JFrame {
 				loginPanel.getPassword(),
 				new PropertyChangeListener() {
 			
-                        @Override
+                        
 			public void propertyChange(PropertyChangeEvent evt) {
 				if(evt.getPropertyName().compareTo("login") == 0 && (Boolean) evt.getNewValue() == true){
 					getContentPane().removeAll();
@@ -144,6 +144,7 @@ public class ReccosC extends JFrame {
 	}
 	
 	private void register(){
+            
 		if(!registerPanel.checkEmail())
 			return;
 		if(!registerPanel.checkPasswords())
@@ -156,11 +157,13 @@ public class ReccosC extends JFrame {
                     registerPanel.getMonth(),
                     registerPanel.getDay(),
                     new PropertyChangeListener() {
-			
-                        @Override
+		
+                        
 			public void propertyChange(PropertyChangeEvent evt) {
+                            System.out.println(evt.getNewValue().toString());
 				if(evt.getNewValue().toString().compareTo("success")==0 ){
-					remove(registerPanel);
+                                        System.out.println("ASD");
+					getContentPane().removeAll();
 					loginPanel.userNameField.setText(registerPanel.getEmail());
 					loginPanel.passwordField.setText(registerPanel.getPassword());
 					loginPanel.passwordField.setEchoChar('*');
