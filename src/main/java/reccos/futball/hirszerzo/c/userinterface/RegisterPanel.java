@@ -80,12 +80,6 @@ public class RegisterPanel extends JPanel {
                 setLayout(new GridBagLayout());
                 GridBagConstraints gc = new GridBagConstraints();
                 
-               
-//                gc.gridx = 0;
-//                gc.gridy = 0;
-//                robom.setFont(new Font("Arial", Font.PLAIN, 42));
-//                add(robom, gc);
-                
                 gc.insets = new Insets(20, 0, 0, 260);
                 gc.gridx = 0;
                 gc.gridy = 2;
@@ -174,81 +168,6 @@ public class RegisterPanel extends JPanel {
                 registerButton.setPreferredSize(new Dimension(320,30));
                 add(registerButton, gc);
                 
-//		textPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-//		textPanel.setLayout(new GridBagLayout());
-//		sexPanel.setBorder(new EmptyBorder(10, 20, 0, 20));
-//		sexPanel.setLayout(new GridBagLayout());
-//		datePanel.setBorder(new EmptyBorder(0, 20, 20, 20));
-//		datePanel.setLayout(new GridBagLayout());
-//
-//		
-//		GridBagConstraints c = new GridBagConstraints();
-//        c.weightx = 1;   
-//        c.weighty = 1;
-//        c.fill = GridBagConstraints.HORIZONTAL;
-//        c.ipady = 10;
-//
-//        textPanel.add(email,c);
-//
-//        c.gridy = 1;
-//        textPanel.add(pwField,c);
-//
-//        c.gridy = 2;
-//        textPanel.add(pwAgain,c);
-//
-//
-//        c = new GridBagConstraints();
-//        c.gridheight = 2;
-//        c.gridwidth = 2;
-//
-//        c.weightx = 1; 
-//        c.weighty = 1;   
-//
-//		c.fill = GridBagConstraints.HORIZONTAL;
-//        c.anchor = GridBagConstraints.PAGE_START;
-//		sexPanel.add(sexLabel, c);
-//		c.weightx = 0.0; 
-//		c.gridy = 2;
-//
-//		sexPanel.add(isMale,   c);
-//		c.weightx = 1; 
-//
-//
-//		sexPanel.add(isFemale, c);
-//		
-//		c = new GridBagConstraints();
-//		c.fill = GridBagConstraints.HORIZONTAL;
-//        c.anchor = GridBagConstraints.PAGE_START;
-//        c.ipady = 20;
-//		c.gridheight = 2;
-//		c.gridwidth = 3;
-//		datePanel.add(dateLabel, c);
-//        c.ipady = 0;
-//
-//		c.gridy = 2;
-//	    c.weightx = 0.0;   
-//	    c.weighty = 1;   
-//		datePanel.add(yearBox,   c);
-//		
-//		c.weightx = 0.5;   
-//		datePanel.add(monthBox,  c);
-//    
-//	    c.weightx = 0.0;   
-//		datePanel.add(dayBox,    c);
-//		
-//		//buttonPanel.add(backButton);
-//		buttonPanel.add(registerButton);
-//		
-//		
-//		sexGroup.add(isMale);
-//		sexGroup.add(isFemale);
-//		
-//		add(textPanel);
-//		add(sexPanel);
-//		add(datePanel);
-//		add(buttonPanel);
-//                
-//                
 	}
         
 	private void setupTextFields(){

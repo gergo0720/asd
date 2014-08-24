@@ -8,10 +8,11 @@
     <referee>Kassai Viktor</referee>
     <teams>
         <homeTeam refid="76035" name="Debreceni VSC">
-            <player number="1" refid="119197" position="goalkeeper" substitute="false">1 Vukasin Polekszics</player>
-            <player number="4" refid="110837" position="outfield" substitute="false">4 JoelDamahou</player>
-            <player number="6" refid="517945" position="outfield" substitute="false">6 Zsidai Laszlo</player>
-            <player number="8" refid="517993" position="outfield" substitute="false">8 Selim Bouadla</player>
+            <player number="-" refid="119191" position="outfield" substitute="false">-  Jatekvezeto</player>
+            <player number="1" refid="119197" position="goalkeeper" substitute="false">1  Vukasin Polekszics</player>
+            <player number="4" refid="110837" position="outfield" substitute="false">4  JoelDamahou</player>
+            <player number="6" refid="517945" position="outfield" substitute="false">6  Zsidai Laszlo</player>
+            <player number="8" refid="517993" position="outfield" substitute="false">8  Selim Bouadla</player>
             <player number="10" refid="128085" position="outfield" substitute="false">10 Rene Mihelic</player>
             <player number="11" refid="356373" position="outfield" substitute="false">11 Ferenczi Janos</player>
             <player number="13" refid="517069" position="outfield" substitute="false">13 Lazar Pal</player>

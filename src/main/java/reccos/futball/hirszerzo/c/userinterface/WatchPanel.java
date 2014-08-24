@@ -30,7 +30,7 @@ public class WatchPanel extends JPanel {
 					remove(playerPanel);
 					add(annotationPanel);
 					
-					if(name.compareTo("Játékvezető") == 0)
+					if(name.compareTo("Jatekvezeto") == 0)
 						annotationPanel.setLayoutType(AnnotationPanel.REFEREE_LAYOUT);
 					else
 						annotationPanel.setLayoutType(AnnotationPanel.PLAYER_LAYOUT);
