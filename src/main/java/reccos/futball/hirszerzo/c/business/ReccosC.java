@@ -146,8 +146,7 @@ public class ReccosC extends JFrame {
                                         setSize(new Dimension(1050, 600));
                                         setLocationRelativeTo(null);
                                         VideoFrame vf = new VideoFrame(frame);
-                                        vf.playVideo();
-                                        //vf.stopVideo();
+                                        //vf.playVideo();
                                         validate();
                                         repaint();
                                 }

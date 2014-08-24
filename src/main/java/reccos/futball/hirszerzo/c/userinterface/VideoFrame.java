@@ -9,19 +9,16 @@ package reccos.futball.hirszerzo.c.userinterface;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.io.File;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JToolBar;
-import uk.co.caprica.vlcj.component.EmbeddedMediaListPlayerComponent;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 import uk.co.caprica.vlcj.player.embedded.videosurface.CanvasVideoSurface;
@@ -37,16 +34,21 @@ public class VideoFrame{
     Canvas canvas;
     WatchPanel watchPanel;
     VideoControlPanel videoControlPanel;
-    JMenuBar menubar;
-    JMenu menu;
-    JMenuItem item;
+    JPanel vidpanel;
+    JPanel buttonpanel;
+    JPanel vidandcontrol;
+    JPanel controlpanel;
+    static Integer startCounter = 1;
+    JLabel blank;
+    ImageIcon imageIcon;
+    String video = null;
 
     public VideoFrame(JFrame f) {
         canvas = new Canvas();
         videoPanel = new JPanel();
         controllPanel = new JPanel();
         videoControlPanel = new VideoControlPanel();
-
+        
         
         
         final MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory();
@@ -58,25 +60,28 @@ public class VideoFrame{
         int vidPanelWidth = 300;
         int vidPanelHeight = 400;
                
-        JPanel vidpanel = new JPanel();
-        JPanel buttonpanel = new JPanel();
-        JPanel controlpanel = new JPanel();
-        JPanel vidandcontrol = new JPanel();
+        vidpanel = new JPanel();
+        buttonpanel = new JPanel();
+        controlpanel = new JPanel();
+        vidandcontrol = new JPanel();
         vidandcontrol.setLayout(new BoxLayout(vidandcontrol, BoxLayout.Y_AXIS));
         vidandcontrol.setPreferredSize(new Dimension(800,100));
         vidpanel.setPreferredSize(new Dimension(800, 500));
         buttonpanel.setPreferredSize(new Dimension(250,500));
-        
+        setupBlankkScreen();
         canvas.setSize(new Dimension(800,500));
         //videoPanel.setLocation(0, 0);
         vidpanel.add(canvas);
+        canvas.setVisible(false);
         //vidpanel.setBackground(Color.RED);
         buttonpanel.setBackground(Color.BLUE);
-        watchPanel = new WatchPanel(new Dimension(250,600));
-        buttonpanel.add(watchPanel);
+        JLabel l = new JLabel("hey there");
+        buttonpanel.add(l);
+        //watchPanel = new WatchPanel(new Dimension(250,600));
+        //buttonpanel.add(watchPanel);
         //controlpanel.setBackground(Color.YELLOW);
         controlpanel.add(videoControlPanel);
-        vidandcontrol.setBackground(Color.MAGENTA);
+        //vidandcontrol.setBackground(Color.MAGENTA);
        
         vidandcontrol.add(vidpanel);
         vidandcontrol.add(controlpanel);
@@ -87,10 +92,12 @@ public class VideoFrame{
         f.add(buttonpanel);
         
         
-        addListeners();
+        addListeners(f);
     }
     public void playVideo() {
-        player.playMedia("D:\\TBBT\\Noah.2014.BDRip.XviD.HUN-ZHR\\Sample\\zhr-noah.avi");
+        player.playMedia(video);
+        
+           
     }
     
     public void stopVideo() {
@@ -105,12 +112,32 @@ public class VideoFrame{
         
     }
     
-    private void addListeners() {
+    private void addListeners(final JFrame f) {
         videoControlPanel.play.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                playVideo();
+                if(video != null) {    
+                    while(startCounter != 0) {  
+                        if(!player.isPlaying()) {
+                            blank.setVisible(false);
+                            canvas.setVisible(true);
+                            playVideo();
+                            startCounter--;
+                        }
+                    }
+
+                    if(player.isPlaying()) {
+                        pauseVideo();
+                        videoControlPanel.play.setText("Start");
+                    } else if(!player.isPlaying()) {
+                        pauseVideo();
+                        videoControlPanel.play.setText("Szünet");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Még nem választott videót, a tallózás gomb segítségével tölthet be videót.");
+                    return;
+                }
             }
         });
         
@@ -118,18 +145,35 @@ public class VideoFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-               stopVideo();
+                stopVideo();
+                startCounter = 1;
+                videoControlPanel.play.setText("Start");            
+                canvas.setVisible(false);
+                blank.setVisible(true);
             }
         });
         
-        videoControlPanel.pause.addActionListener(new ActionListener() {
+        videoControlPanel.browse.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-               pauseVideo();
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+                int resultVal = fileChooser.showOpenDialog(f);
+                if(resultVal == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    video = selectedFile.getAbsoluteFile().toString();
+                }
             }
         });
     }
     
+    private void setupBlankkScreen() {
+        imageIcon = new ImageIcon(getClass().getResource("/logo300x300op.png"));
+        //Image image = imageicon.getImage();
+        blank = new JLabel(imageIcon);
+        vidpanel.add(blank);
+    }
+ 
 }
 

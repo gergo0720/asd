@@ -26,12 +26,10 @@ public class VideoControlPanel extends JPanel {
         
         play = new JButton("Start");
         stop = new JButton("Stop");
-        pause = new JButton("Pause");
         browse = new JButton("Tallózás");
         
         add(play);
         add(stop);
-        add(pause);
         add(browse);
         
     }
