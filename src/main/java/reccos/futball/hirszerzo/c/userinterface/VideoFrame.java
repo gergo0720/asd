@@ -226,9 +226,7 @@ public class VideoFrame{
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println(e.getX());
-                System.out.println(seekPanel.seekSlider.getValue());
-                System.out.println(seekPanel.seekSlider.getX());
+                seekPanel.seekSlider.setValue((int)player.getLength() / seekPanel.seekSlider.getSize().width * e.getX());
             }
 
             @Override
