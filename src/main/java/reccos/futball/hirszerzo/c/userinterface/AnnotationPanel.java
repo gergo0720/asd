@@ -195,10 +195,10 @@ public class AnnotationPanel extends JPanel implements MouseListener,
 	}
 	
 	private void drawHeader(Graphics2D g) {
-		g.drawString(playerName,  backButton.x + backButton.width + 5, 30);
+		g.drawString(playerName,  backButton.x + backButton.width + 5, 20);
 		String m = minutes > 9 ? minutes.toString() : "0" + minutes;
 		String s = seconds > 9 ? seconds.toString() : "0" + seconds;
-		g.drawString(m + ":" + s, playButton.x - 55, 30);
+		g.drawString(m + ":" + s, playButton.x - 55, 20);
 		drawPlayButton(g);
 		drawBackButton(g);
 
