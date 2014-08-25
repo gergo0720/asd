@@ -9,6 +9,7 @@ package reccos.futball.hirszerzo.c.userinterface;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -67,6 +68,7 @@ public class VideoFrame{
         vidandcontrol.setLayout(new BoxLayout(vidandcontrol, BoxLayout.Y_AXIS));
         vidandcontrol.setPreferredSize(new Dimension(800,100));
         vidpanel.setPreferredSize(new Dimension(800, 500));
+        buttonpanel.setLayout(new GridLayout(1,1));
         buttonpanel.setPreferredSize(new Dimension(250,500));
         setupBlankkScreen();
         canvas.setSize(new Dimension(800,500));
@@ -74,11 +76,11 @@ public class VideoFrame{
         vidpanel.add(canvas);
         canvas.setVisible(false);
         //vidpanel.setBackground(Color.RED);
-        buttonpanel.setBackground(Color.BLUE);
-        JLabel l = new JLabel("hey there");
-        buttonpanel.add(l);
-        //watchPanel = new WatchPanel(new Dimension(250,600));
-        //buttonpanel.add(watchPanel);
+        //buttonpanel.setBackground(Color.BLUE);
+        //JLabel l = new JLabel("hey there");
+        //buttonpanel.add(l);
+        watchPanel = new WatchPanel();
+        buttonpanel.add(watchPanel);
         //controlpanel.setBackground(Color.YELLOW);
         controlpanel.add(videoControlPanel);
         //vidandcontrol.setBackground(Color.MAGENTA);
@@ -89,15 +91,13 @@ public class VideoFrame{
         
        
         f.add(vidandcontrol);
-        f.add(buttonpanel);
+        f.add(watchPanel);
         
         
         addListeners(f);
     }
     public void playVideo() {
         player.playMedia(video);
-        
-           
     }
     
     public void stopVideo() {
@@ -117,25 +117,31 @@ public class VideoFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(video != null) {    
-                    while(startCounter != 0) {  
-                        if(!player.isPlaying()) {
-                            blank.setVisible(false);
-                            canvas.setVisible(true);
-                            playVideo();
-                            startCounter--;
+                if(PlayerSelectorPanel.isPlayerSelected) {    
+                    if(video != null) {    
+                        while(startCounter != 0) {  
+                            if(!player.isPlaying()) {
+                                blank.setVisible(false);
+                                canvas.setVisible(true);
+                                playVideo();
+                                startCounter--;
+                            }
                         }
-                    }
 
-                    if(player.isPlaying()) {
-                        pauseVideo();
-                        videoControlPanel.play.setText("Start");
-                    } else if(!player.isPlaying()) {
-                        pauseVideo();
-                        videoControlPanel.play.setText("Szünet");
+                        if(player.isPlaying()) {
+                            pauseVideo();
+                            System.out.println(player.getLength());
+                            videoControlPanel.play.setText("Start");
+                        } else if(!player.isPlaying()) {
+                            pauseVideo();
+                            videoControlPanel.play.setText("Szünet");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Még nem választott videót, a tallózás gomb segítségével tölthet be videót.");
+                        return;
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Még nem választott videót, a tallózás gomb segítségével tölthet be videót.");
+                    JOptionPane.showMessageDialog(null, "Még nem választott követendő személyt, a jobboldali listából választhat.");
                     return;
                 }
             }

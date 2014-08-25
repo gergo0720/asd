@@ -13,9 +13,9 @@ public class WatchPanel extends JPanel {
 	
 	PlayerSelectorPanel playerPanel;
 	AnnotationPanel annotationPanel = new AnnotationPanel();
+	Dimension size = new Dimension(250,600);
 	
-	
-	public WatchPanel(Dimension size) {
+	public WatchPanel() {
 		setBackground(new Color(243,244,247));
 		setFocusable(true);
 		playerPanel = new PlayerSelectorPanel(size);

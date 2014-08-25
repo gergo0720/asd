@@ -58,7 +58,7 @@ public class ReccosC extends JFrame {
                 setLocationRelativeTo(null);
                 setTitle("Futball hírszerző");
                
-                watchPanel = new WatchPanel(getSize());
+                watchPanel = new WatchPanel();
                 loginPanel = new LoginPanel();
                 registerPanel = new RegisterPanel(getSize());
                 welcome = new WelcomePanel(loginPanel, registerPanel, this);

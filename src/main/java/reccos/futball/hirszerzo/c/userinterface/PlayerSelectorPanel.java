@@ -32,6 +32,7 @@ public class PlayerSelectorPanel extends JPanel{
 	JScrollPane scrollPane;
 	JButton selectButton;
 	XML xml;
+        public static Boolean isPlayerSelected = false;
         
 	public PlayerSelectorPanel(Dimension size) {
                 xml = new XML();
@@ -70,6 +71,7 @@ public class PlayerSelectorPanel extends JPanel{
 				Annotator.setPlayer(getSelectedName());
 				Annotator.setMatch("matchID");
 				firePropertyChange("player", "nobody", getSelectedName());
+                                isPlayerSelected = true;
 				return;
 			}
 		});
