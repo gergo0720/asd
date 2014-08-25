@@ -49,7 +49,7 @@ public class VideoFrame{
     JLabel blank;
     ImageIcon imageIcon;
     String video = null;
-    seekPanel seekPanel;
+    SeekPanel seekPanel;
     
 
     public VideoFrame(JFrame f) {
@@ -57,7 +57,7 @@ public class VideoFrame{
         videoPanel = new JPanel();
         controllPanel = new JPanel();
         videoControlPanel = new VideoControlPanel();
-        seekPanel = new seekPanel();
+        seekPanel = new SeekPanel();
         
         
         

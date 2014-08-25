@@ -27,19 +27,20 @@ import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
  *
  * @author koverg
  */
-public class seekPanel extends JPanel {
+public class SeekPanel extends JPanel {
     JSlider seekSlider;
     Timer timer;
     JLabel showTimer;
-    int hours = 0;
-    int seconds = 0;
-    int minutes = 0;
-    int maxHours = 0;
-    int maxSeconds = 0;
-    int maxMinutes = 0;
+    Integer hours = 0;
+    Integer seconds = 0;
+    Integer minutes = 0;
+    Integer maxHours = 0;
+    Integer maxSeconds = 0;
+    Integer maxMinutes = 0;
+    String s, m, h, ms, mm, mh;
     boolean timerChanged = false;
-    public seekPanel() {
-        setPreferredSize(new Dimension(400,50));
+    public SeekPanel() {
+        setPreferredSize(new Dimension(450,50));
         showTimer = new JLabel();
         seekSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
         seekSlider.setPreferredSize(new Dimension(300,50));
@@ -60,7 +61,13 @@ public class seekPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 
                     seconds = (int) ((player.getTime() / 1000) - ((player.getTime() / 1000) / 60) *60);
+                    s = seconds > 9 ? seconds.toString() : "0"+seconds;
                     minutes = (int) (player.getTime() / 60000);
+                    m = minutes > 9 ? minutes.toString() : "0"+minutes;
+                    hours = (int) ((player.getLength() / 360000) - ((player.getLength() / 360000) / 60) *60);
+                    h = hours > 9 ? hours.toString() : "0"+hours;
+                    
+                    
                     
                     if(player.getTime() == player.getLength()) {
                         player.stop();
@@ -80,6 +87,8 @@ public class seekPanel extends JPanel {
         maxSeconds = (int) ((player.getLength() / 1000) - ((player.getLength() / 1000) / 60) *60);
         maxMinutes = (int) ((player.getLength() / 60000) - ((player.getLength() / 60000) / 60) *60);
         maxHours = (int) ((player.getLength() / 360000) - ((player.getLength() / 360000) / 60) *60);
+        
+        
     }
     
     public void timerStop() {
@@ -91,7 +100,12 @@ public class seekPanel extends JPanel {
     }
     
     private void showTime() {
-        showTimer.setText(hours + ":" + minutes + ":" + seconds + " / " + maxHours + ":" + maxMinutes + ":" + maxSeconds);
+        
+        ms = maxSeconds > 9 ? maxSeconds.toString() : "0"+maxSeconds;
+        mm = maxMinutes > 9 ? maxMinutes.toString() : "0"+maxMinutes;
+        mh = maxHours > 9 ? maxHours.toString() : "0"+maxHours;
+        
+        showTimer.setText(h + ":" + m + ":" + s + " / " + mh + ":" + mm + ":" + ms);
     }
     
 }
