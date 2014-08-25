@@ -46,10 +46,12 @@ public class VideoFrame{
     JPanel buttonpanel;
     JPanel vidandcontrol;
     static Integer startCounter = 1;
+    static Boolean playing = false;
     JLabel blank;
     ImageIcon imageIcon;
     String video = null;
     SeekPanel seekPanel;
+    
     
 
     public VideoFrame(JFrame f) {
@@ -110,18 +112,31 @@ public class VideoFrame{
     }
     public void playVideo() {
         player.playMedia(video);
+        VideoFrame.playing = true;
     }
     
     public void stopVideo() {
-        player.stop();
+        if(player.isPlaying()) {    
+            player.stop();
+            seekPanel.timerStop();
+            VideoFrame.playing = false;
+            seekPanel.timerChanged = false;
+        }
     }
     
     public void pauseVideo() {
+        VideoFrame.playing = false;
         player.pause();
     }
     
-    private void videoBroweser() {
-        
+    private void videoBroweser(JFrame f) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        int resultVal = fileChooser.showOpenDialog(f);
+        if(resultVal == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            video = selectedFile.getAbsoluteFile().toString();
+        }
     }
     
     private void addListeners(final JFrame f) {
@@ -167,6 +182,7 @@ public class VideoFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 stopVideo();
+                seekPanel.configureSlider(0, (int) player.getLength());
                 startCounter = 1;
                 videoControlPanel.play.setText("Start");            
                 canvas.setVisible(false);
@@ -178,12 +194,10 @@ public class VideoFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-                int resultVal = fileChooser.showOpenDialog(f);
-                if(resultVal == JFileChooser.APPROVE_OPTION) {
-                    File selectedFile = fileChooser.getSelectedFile();
-                    video = selectedFile.getAbsoluteFile().toString();
+                if(!player.isPlaying()) {
+                    videoBroweser(f);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Kérem először állítsa meg a videót.");
                 }
             }
         });
@@ -198,8 +212,8 @@ public class VideoFrame{
     
     private void setupSeekPanel() {
         try {
-            Thread.sleep(50);
-            seekPanel.configureSlider((int)player.getLength());
+            Thread.sleep(200);
+            seekPanel.configureSlider(0,(int)player.getLength());
            
         } catch (InterruptedException ex) {
             Logger.getLogger(VideoFrame.class.getName()).log(Level.SEVERE, null, ex);
