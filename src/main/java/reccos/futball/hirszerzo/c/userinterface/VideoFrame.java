@@ -25,6 +25,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
@@ -46,7 +47,7 @@ public class VideoFrame{
     JPanel buttonpanel;
     JPanel vidandcontrol;
     static Integer startCounter = 1;
-    static Boolean playing = false;
+    static Boolean playing = true;
     JLabel blank;
     ImageIcon imageIcon;
     String video = null;
@@ -112,20 +113,18 @@ public class VideoFrame{
     }
     public void playVideo() {
         player.playMedia(video);
-        VideoFrame.playing = true;
+        
     }
     
     public void stopVideo() {
         if(player.isPlaying()) {    
             player.stop();
             seekPanel.timerStop();
-            VideoFrame.playing = false;
             seekPanel.timerChanged = false;
         }
     }
     
     public void pauseVideo() {
-        VideoFrame.playing = false;
         player.pause();
     }
     
@@ -201,6 +200,40 @@ public class VideoFrame{
                 }
             }
         });
+        
+        seekPanel.timer = new Timer(0, new ActionListener() {
+			
+            public void actionPerformed(ActionEvent e) {
+                
+                    seekPanel.seconds = (int) ((player.getTime() / 1000) - ((player.getTime() / 1000) / 60) *60);
+                    seekPanel.s = seekPanel.seconds > 9 ? seekPanel.seconds.toString() : "0"+seekPanel.seconds;
+                    seekPanel.minutes = (int) ((player.getTime() / 60000) - ((player.getTime() / 60000) / 60) *60);
+                    seekPanel.m = seekPanel.minutes > 9 ? seekPanel.minutes.toString() : "0"+seekPanel.minutes;
+                    seekPanel.hours = (int) ((player.getTime() / 3600000) - ((player.getTime() / 3600000) / 60) *60);
+                    seekPanel.h = seekPanel.hours > 9 ? seekPanel.hours.toString() : "0"+seekPanel.hours;
+                    
+                    if((seekPanel.hours.equals(seekPanel.maxHours)) &&
+                            (seekPanel.minutes.equals(seekPanel.maxMinutes)) &&
+                            (seekPanel.seconds.equals(seekPanel.maxSeconds))) {
+                        stopVideo();
+                        seekPanel.configureSlider(0, (int) player.getLength());
+                        startCounter = 1;
+                        videoControlPanel.play.setText("Start");            
+                        canvas.setVisible(false);
+                        blank.setVisible(true);
+                    }
+                    
+                    seekPanel.timerChanged = true;
+                    if(player.isPlaying() && VideoFrame.playing) {
+                        seekPanel.seekSlider.setValue((int)player.getTime());
+                    }
+                    
+                    seekPanel.showTime();
+                    seekPanel.repaint();
+            }
+        });
+        seekPanel.timer.setRepeats(true);
+        seekPanel.timer.setInitialDelay(0);
     }
     
     private void setupBlankScreen() {
@@ -212,45 +245,32 @@ public class VideoFrame{
     
     private void setupSeekPanel() {
         try {
-            Thread.sleep(200);
+            Thread.sleep(100);
             seekPanel.configureSlider(0,(int)player.getLength());
            
         } catch (InterruptedException ex) {
             Logger.getLogger(VideoFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-            if(!seekPanel.timerChanged) {
-                seekPanel.seekSlider.addChangeListener(new ChangeListener() {
-                    @Override
-                    public void stateChanged(ChangeEvent e) {
-                        if (seekPanel.timerChanged) {
-                            seekPanel.timerChanged = false;
-                            try {
-                                Thread.sleep(50);
-                            } catch(Exception ex) {
-                                
-                            }
-                            return; 
-                        }
-                        player.setTime(seekPanel.seekSlider.getValue());
-                    }
-                });
-            }
             
             seekPanel.seekSlider.addMouseListener(new MouseListener() {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                seekPanel.seekSlider.setValue((int)player.getLength() / seekPanel.seekSlider.getSize().width * e.getX());
+                
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                playing=false;
+                seekPanel.seekSlider.setValue((int)player.getLength() / seekPanel.seekSlider.getSize().width * e.getX());
+                player.setTime(seekPanel.seekSlider.getValue());
+                sliderListener();
+                
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                playing=true;
             }
 
             @Override
@@ -263,8 +283,17 @@ public class VideoFrame{
 //                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
-        
+    }
+    
+    public void sliderListener() {
+        seekPanel.seekSlider.addChangeListener(new ChangeListener() {
 
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(!VideoFrame.playing)
+                    player.setTime(seekPanel.seekSlider.getValue());
+            }
+        });
     }
  
 }

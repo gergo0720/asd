@@ -54,42 +54,9 @@ public class SeekPanel extends JPanel {
     }
     
     public void configureTimer(final EmbeddedMediaPlayer player) {
-        
-        
-        timer = new Timer(0, new ActionListener() {
-			
-            public void actionPerformed(ActionEvent e) {
-                
-                    seconds = (int) ((player.getTime() / 1000) - ((player.getTime() / 1000) / 60) *60);
-                    s = seconds > 9 ? seconds.toString() : "0"+seconds;
-                    minutes = (int) ((player.getTime() / 60000) - ((player.getTime() / 60000) / 60) *60);
-                    m = minutes > 9 ? minutes.toString() : "0"+minutes;
-                    hours = (int) ((player.getTime() / 3600000) - ((player.getTime() / 3600000) / 60) *60);
-                    h = hours > 9 ? hours.toString() : "0"+hours;
-                    
-                    
-                    
-                    if(player.getTime() == player.getLength()) {
-                        player.stop();
-                        //timer.restart();
-                    }
-                    
-                    timerChanged = true;
-                    if(VideoFrame.playing)
-                        seekSlider.setValue((int)player.getTime());
-                    
-                    showTime();
-                    repaint();
-            }
-        });
-        timer.setRepeats(true);
-        timer.setInitialDelay(0);
-        
         maxSeconds = (int) ((player.getLength() / 1000) - ((player.getLength() / 1000) / 60) *60);
         maxMinutes = (int) ((player.getLength() / 60000) - ((player.getLength() / 60000) / 60) *60);
         maxHours = (int) ((player.getLength() / 3600000) - ((player.getLength() / 3600000) / 60) *60);
-        
-        
     }
     
     public void timerStop() {
@@ -100,7 +67,7 @@ public class SeekPanel extends JPanel {
         timer.start();
     }
     
-    private void showTime() {
+    public void showTime() {
         
         ms = maxSeconds > 9 ? maxSeconds.toString() : "0"+maxSeconds;
         mm = maxMinutes > 9 ? maxMinutes.toString() : "0"+maxMinutes;
