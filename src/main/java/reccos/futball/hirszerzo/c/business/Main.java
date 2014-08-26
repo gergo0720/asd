@@ -17,7 +17,7 @@ public class Main extends JDesktopPane{
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
                             setupLibVLC();
-                            load(System.getProperty("os.name"), System.getProperty("os.arch"));
+                            load();
                             try {
                                 Thread.sleep(3200);
                             } catch(Exception e) {
@@ -29,20 +29,7 @@ public class Main extends JDesktopPane{
                             frame.requestFocusInWindow();
 			}
 
-                    private void load(String os, String osArch) {
-                        String libsPath = null;
-                        if(os.toLowerCase().contains("windows"))
-                           if(osArch.toLowerCase().contains("64")) { 
-                               libsPath = "C:\\Program Files\\VideoLAN\\VLC";
-                           } else {
-                               libsPath = "C:\\Program Files (x86)\\VideoLAN\\VLC";
-                           }
-                        else {
-                            libsPath = "/usr/lib";
-                        }
-                        
-                        
-                        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), libsPath);
+                    private void load() {
                         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
                     }
                     
@@ -53,8 +40,9 @@ public class Main extends JDesktopPane{
                         // discovery()'s method return value is WRONG on Linux
                         try {
                             LibVlcVersion.getVersion();
-                        } catch (Exception e) {
-                            JOptionPane.showMessageDialog(null, "Nem található a VLC");
+                        } catch (UnsatisfiedLinkError e) {
+                            JOptionPane.showMessageDialog(null, "Ön a 64 bites Futball-Hírszerzőt használja, azonban nem található ehhez megfelelő 64 bites VLC");
+                            System.exit(0);
                         }
                     }
 		});

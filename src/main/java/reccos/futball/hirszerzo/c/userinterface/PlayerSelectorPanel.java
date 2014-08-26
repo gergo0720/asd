@@ -40,7 +40,12 @@ public class PlayerSelectorPanel extends JPanel{
                 playerList = new JList<String>(players);
                 scrollPane = new JScrollPane(playerList);
                 selectButton = new JButton("Személy választása");
-
+                
+                selectButton.setForeground(Color.WHITE);
+                selectButton.setFont(new Font("Monospace", Font.BOLD, 12));
+                selectButton.setFocusPainted(false);
+                selectButton.setBackground(new Color(64,64,64));
+                
 		setBackground(new Color(96,96,96));
 
 		BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
@@ -64,17 +69,6 @@ public class PlayerSelectorPanel extends JPanel{
 		playerList.setSelectedIndex(0);
 		//homePlayerList.addListSelectionListener(this);
 		
-		
-		selectButton.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				Annotator.setPlayer(getSelectedName());
-				Annotator.setMatch("matchID");
-				firePropertyChange("player", "nobody", getSelectedName());
-                                isPlayerSelected = true;
-				return;
-			}
-		});
 	}
 	
 	public String getSelectedName(){
@@ -94,7 +88,7 @@ public class PlayerSelectorPanel extends JPanel{
 	        	 c.setBackground(new Color(233,234,237));
 	         
 	         if(isSelected == true)
-	        	 c.setBackground(new Color(150,150,250));
+	        	 c.setBackground(new Color(245,67,67));
 	         setText(" " + getText());
 	         return c;
 	     }

@@ -30,6 +30,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import reccos.futball.hirszerzo.c.business.JabberSmackApi;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 import uk.co.caprica.vlcj.player.embedded.videosurface.CanvasVideoSurface;
@@ -56,7 +57,7 @@ public class VideoFrame{
     String video = null;
     SeekPanel seekPanel;
     GridBagConstraints gc;
-    
+    Boolean offline = false;
     
 
     public VideoFrame(JFrame f) {
@@ -212,19 +213,31 @@ public class VideoFrame{
         seekPanel.timer = new Timer(0, new ActionListener() {
 			
             public void actionPerformed(ActionEvent e) {
-                
+//                    if(!JabberSmackApi.getInstance().isConnected() && !offline) {
+//                        setOfflineState();
+//                    }
+//                    
+//                    if(JabberSmackApi.getInstance().isConnected() && offline) {
+//                        setOnlineState();
+//                    }
+                    
+                    
                     seekPanel.seconds = (int) ((player.getTime() / 1000) - ((player.getTime() / 1000) / 60) *60);
                     seekPanel.s = seekPanel.seconds > 9 ? seekPanel.seconds.toString() : "0"+seekPanel.seconds;
+                    Integer msgSec = (int) ((player.getTime() / 1000) - ((player.getTime() / 1000) / 60) *60);
+                    SeekPanel.secondsMessage = msgSec > 9 ? msgSec.toString() : "0"+msgSec;
                     seekPanel.minutes = (int) ((player.getTime() / 60000) - ((player.getTime() / 60000) / 60) *60);
                     seekPanel.m = seekPanel.minutes > 9 ? seekPanel.minutes.toString() : "0"+seekPanel.minutes;
+                    Integer msgMin = (int) (player.getTime() / 60000);
+                    SeekPanel.minutesMessage = msgMin > 9 ? msgMin.toString() : "0"+msgMin;
                     seekPanel.hours = (int) ((player.getTime() / 3600000) - ((player.getTime() / 3600000) / 60) *60);
                     seekPanel.h = seekPanel.hours > 9 ? seekPanel.hours.toString() : "0"+seekPanel.hours;
                     
                     if((seekPanel.hours.equals(seekPanel.maxHours)) &&
                             (seekPanel.minutes.equals(seekPanel.maxMinutes)) &&
                             (seekPanel.seconds.equals(seekPanel.maxSeconds))) {
-                        stopVideo();
                         seekPanel.configureSlider(0, (int) player.getLength());
+                        stopVideo();
                         startCounter = 1;
                         videoControlPanel.play.setText("Start");            
                         canvas.setVisible(false);
@@ -238,6 +251,24 @@ public class VideoFrame{
                     
                     seekPanel.showTime();
                     seekPanel.repaint();
+            }
+
+            private void setOnlineState() {
+                pauseVideo();
+                watchPanel.enableButtons();
+                videoControlPanel.enableButtons();
+                seekPanel.enableSlider();
+                offline = false;
+            }
+
+            private void setOfflineState() {
+                pauseVideo();
+                watchPanel.disableButtons();
+                videoControlPanel.disableButtons();
+                seekPanel.disableSlider();
+                offline = true;
+                JOptionPane.showMessageDialog(null, "Megszakadt a kapcsolat a szerverrel, kérem ellenőrizze az internet kapcsolatot");
+                return;
             }
         });
         seekPanel.timer.setRepeats(true);
@@ -269,16 +300,20 @@ public class VideoFrame{
 
             @Override
             public void mousePressed(MouseEvent e) {
-                playing=false;
-                seekPanel.seekSlider.setValue((int)player.getLength() / seekPanel.seekSlider.getSize().width * e.getX());
-                player.setTime(seekPanel.seekSlider.getValue());
-                sliderListener();
+                if(JabberSmackApi.getInstance().isConnected()) {    
+                    playing=false;
+                    seekPanel.seekSlider.setValue((int)player.getLength() / seekPanel.seekSlider.getSize().width * e.getX());
+                    player.setTime(seekPanel.seekSlider.getValue());
+                    sliderListener();
+                }
                 
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                playing=true;
+                if(JabberSmackApi.getInstance().isConnected()) {
+                    playing=true;
+                }
             }
 
             @Override

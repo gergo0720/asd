@@ -51,5 +51,17 @@ public class VideoControlPanel extends JPanel {
         
     }
     
+    public void disableButtons() {
+        stop.setEnabled(false);
+        play.setEnabled(false);
+        browse.setEnabled(false);
+    }
+    
+    public void enableButtons() {
+        stop.setEnabled(true);
+        play.setEnabled(true);
+        browse.setEnabled(true);
+    }
+    
     
 }

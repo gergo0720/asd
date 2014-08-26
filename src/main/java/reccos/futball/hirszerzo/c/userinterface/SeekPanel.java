@@ -8,6 +8,7 @@ package reccos.futball.hirszerzo.c.userinterface;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -28,6 +29,7 @@ import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
  * @author koverg
  */
 public class SeekPanel extends JPanel {
+    Component[] c;
     JSlider seekSlider;
     Timer timer;
     JLabel showTimer;
@@ -37,7 +39,25 @@ public class SeekPanel extends JPanel {
     Integer maxHours = 0;
     Integer maxSeconds = 0;
     Integer maxMinutes = 0;
-    String s, m, h, ms, mm, mh;
+    String s = "00", m = "00", h = "00", ms, mm, mh;
+    static String secondsMessage = "00";
+
+    public static String getSecondsMessage() {
+        return secondsMessage;
+    }
+
+    public static void setSecondsMessage(String secondsMessage) {
+        SeekPanel.secondsMessage = secondsMessage;
+    }
+
+    public static String getMinutesMessage() {
+        return minutesMessage;
+    }
+
+    public static void setMinutesMessage(String minutesMessage) {
+        SeekPanel.minutesMessage = minutesMessage;
+    }
+    static String minutesMessage = "00";
     boolean timerChanged = false;
     public SeekPanel() {
         setPreferredSize(new Dimension(450,50));
@@ -46,6 +66,7 @@ public class SeekPanel extends JPanel {
         seekSlider.setPreferredSize(new Dimension(300,50));
         add(seekSlider);
         add(showTimer);
+        showTime();
     }
     
     public void configureSlider(int min, int max) {
@@ -78,4 +99,17 @@ public class SeekPanel extends JPanel {
         showTimer.setFont(new Font("Monospace", Font.BOLD, 12));
     }
     
+    public void disableSlider() {
+        c = getComponents();
+        for(Component comp: c) {
+            comp.setEnabled(false);
+        }
+    }
+    
+    public void enableSlider() {
+        c = getComponents();
+        for(Component comp: c) {
+            comp.setEnabled(true);
+        }
+    }
 }

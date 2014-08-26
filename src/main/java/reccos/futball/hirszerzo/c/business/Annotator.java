@@ -16,7 +16,7 @@ public class Annotator {
             matchID = match;
     }
 
-    public static void sendPlayerEvent(String event, String qualifier) throws XMPPException, IllegalStateException, IllegalArgumentException{
+    public static void sendPlayerEvent(String event, String qualifier, String time) throws XMPPException, IllegalStateException, IllegalArgumentException{
             if(matchID == null)
                     throw new IllegalStateException("matchId can't be null.");
             if(playerID == null)
@@ -25,6 +25,8 @@ public class Annotator {
                     throw new IllegalArgumentException("event can't be null.");
             if(qualifier == null)
                     throw new IllegalArgumentException("qualifier can't be null.");
+            if(time == null)
+                    throw new IllegalArgumentException("time can't be null");
 
             String message = "<playerEvent "
                             + "type=\"" + event
@@ -32,20 +34,24 @@ public class Annotator {
                     + "\" matchID=\"" + matchID
                     //+ "\" userID=\"" + username
                     + "\" player=\"" + playerID
+                    + "\" time=\"" + time
                     + "\"/>\n";
             JabberSmackApi.getInstance().sendMessage(message);
             System.out.println("player: " + message + " was sent");
     }
 
-    public static void sendRefereeEvent(String qualifier) throws XMPPException, IllegalStateException, IllegalArgumentException{
+    public static void sendRefereeEvent(String qualifier, String time) throws XMPPException, IllegalStateException, IllegalArgumentException{
             if(matchID == null)
                     throw new IllegalStateException("matchId can't be null.");
             if(qualifier == null)
                     throw new IllegalArgumentException("qualifier can't be null.");
+            if(time == null)
+                    throw new IllegalArgumentException("time can't be null");
 
             String message = "<refereeEvent "
             + " qualifier=\"" + qualifier 
             + "\" matchID=\"" + matchID
+            + "\" time=\"" + time
             //  + "\" userID=\"" + username
             + "\"/>\n";
             JabberSmackApi.getInstance().sendMessage(message);
