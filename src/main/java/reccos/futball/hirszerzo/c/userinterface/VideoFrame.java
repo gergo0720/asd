@@ -10,6 +10,8 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,6 +54,7 @@ public class VideoFrame{
     ImageIcon imageIcon;
     String video = null;
     SeekPanel seekPanel;
+    GridBagConstraints gc;
     
     
 
@@ -61,8 +64,6 @@ public class VideoFrame{
         controllPanel = new JPanel();
         videoControlPanel = new VideoControlPanel();
         seekPanel = new SeekPanel();
-        
-        
         
         final MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory();
         player = mediaPlayerFactory.newEmbeddedMediaPlayer();
@@ -77,22 +78,27 @@ public class VideoFrame{
         buttonpanel = new JPanel();
         controllPanel = new JPanel();
         vidandcontrol = new JPanel();
+        vidandcontrol.setBackground(new Color(128,128,128));
+        buttonpanel.setBackground(new Color(128,128,128));
+        vidpanel.setBackground(new Color(128,128,128));
+        controllPanel.setBackground(new Color(96,96,96));
+        videoControlPanel.setBackground(new Color(96,96,96));
+        seekPanel.setBackground(new Color(96,96,96));
+        seekPanel.seekSlider.setBackground(new Color(96,96,96));
         vidandcontrol.setLayout(new BoxLayout(vidandcontrol, BoxLayout.Y_AXIS));
-        vidandcontrol.setPreferredSize(new Dimension(800,100));
-        vidpanel.setPreferredSize(new Dimension(800, 500));
+        vidandcontrol.setPreferredSize(new Dimension(780,600));
+        vidpanel.setPreferredSize(new Dimension(780, 500));
+        vidpanel.setLayout(new GridBagLayout());
         buttonpanel.setLayout(new GridLayout(1,1));
         buttonpanel.setPreferredSize(new Dimension(250,500));
         controllPanel.setLayout(new FlowLayout());
+        gc = new GridBagConstraints();
         
         setupBlankScreen();
-        canvas.setSize(new Dimension(800,500));
-        //videoPanel.setLocation(0, 0);
+        canvas.setPreferredSize(new Dimension(780,500));
         vidpanel.add(canvas);
         canvas.setVisible(false);
-        //vidpanel.setBackground(Color.RED);
-        //buttonpanel.setBackground(Color.BLUE);
-        //JLabel l = new JLabel("hey there");
-        //buttonpanel.add(l);
+        
         watchPanel = new WatchPanel();
         buttonpanel.add(watchPanel);
         //controlpanel.setBackground(Color.YELLOW);
@@ -103,8 +109,6 @@ public class VideoFrame{
         vidandcontrol.add(vidpanel);
         vidandcontrol.add(controllPanel);
                 
-        
-       
         f.add(vidandcontrol);
         f.add(watchPanel);
         
@@ -147,12 +151,7 @@ public class VideoFrame{
                     if(video != null) {    
                         while(startCounter != 0) {  
                             if(!player.isPlaying()) {
-                                blank.setVisible(false);
-                                canvas.setVisible(true);
-                                playVideo();
-                                startCounter--;
-                                setupSeekPanel();
-                                seekPanel.configureTimer(player);
+                                setupInitialPlay();
                             }
                         }
 
@@ -295,6 +294,14 @@ public class VideoFrame{
             }
         });
     }
- 
+    
+    private void setupInitialPlay() {
+        blank.setVisible(false);
+        canvas.setVisible(true);
+        playVideo();
+        startCounter--;
+        setupSeekPanel();
+        seekPanel.configureTimer(player);
+    }
 }
 

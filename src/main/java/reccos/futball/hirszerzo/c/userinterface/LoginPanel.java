@@ -44,6 +44,20 @@ public class LoginPanel extends JPanel {
 		//setBackground(new Color(243,244,247));
 		setupGUI();
 		setupListeners();
+                setBackground(new Color(96,96,96));
+                robom.setForeground(Color.WHITE);
+                robom.setFont(new Font("Monospace", Font.BOLD, 40));
+                
+                emailLabel.setForeground(Color.WHITE);
+                emailLabel.setFont(new Font("Monospace", Font.BOLD, 12));
+                
+                passwordLabel.setForeground(Color.WHITE);
+                passwordLabel.setFont(new Font("Monospace", Font.BOLD, 12));
+                
+                loginButton.setForeground(Color.WHITE);
+                loginButton.setFont(new Font("Monospace", Font.BOLD, 12));
+                loginButton.setBackground(new Color(64,64,64));
+                loginButton.setFocusPainted(false);
 	}
         
         @Override
@@ -66,7 +80,6 @@ public class LoginPanel extends JPanel {
             
             gc.gridx = 0;
             gc.gridy = 0;
-            robom.setFont(new Font("Arial", Font.PLAIN, 42));
             add(robom, gc);
             
             gc.insets = new Insets(120, 0, 0, 260);

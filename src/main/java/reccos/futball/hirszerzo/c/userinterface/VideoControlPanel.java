@@ -6,6 +6,8 @@
 
 package reccos.futball.hirszerzo.c.userinterface;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -27,6 +29,21 @@ public class VideoControlPanel extends JPanel {
         play = new JButton("Start");
         stop = new JButton("Stop");
         browse = new JButton("Tallózás");
+        
+        play.setForeground(Color.WHITE);
+        play.setFont(new Font("Monospace", Font.BOLD, 12));
+        play.setFocusPainted(false);
+        play.setBackground(new Color(64,64,64));
+        
+        stop.setForeground(Color.WHITE);
+        stop.setFont(new Font("Monospace", Font.BOLD, 12));
+        stop.setFocusPainted(false);
+        stop.setBackground(new Color(64,64,64));
+        
+        browse.setForeground(Color.WHITE);
+        browse.setFont(new Font("Monospace", Font.BOLD, 12));
+        browse.setFocusPainted(false);
+        browse.setBackground(new Color(64,64,64));
         
         add(play);
         add(stop);

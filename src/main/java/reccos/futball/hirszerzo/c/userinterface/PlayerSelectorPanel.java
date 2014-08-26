@@ -41,7 +41,7 @@ public class PlayerSelectorPanel extends JPanel{
                 scrollPane = new JScrollPane(playerList);
                 selectButton = new JButton("Személy választása");
 
-		setBackground(new Color(243,244,247));
+		setBackground(new Color(96,96,96));
 
 		BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		setBorder(new EmptyBorder(5, 5, 5, 5));

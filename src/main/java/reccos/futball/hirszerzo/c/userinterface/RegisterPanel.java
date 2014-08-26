@@ -1,6 +1,7 @@
 package reccos.futball.hirszerzo.c.userinterface;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
@@ -57,8 +58,33 @@ public class RegisterPanel extends JPanel {
 	
 	public RegisterPanel(Dimension size) {
 		setPreferredSize(size);
+                setBackground(new Color(96,96,96));
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		setupGUI();
+                
+                
+                robom.setForeground(Color.WHITE);
+                robom.setFont(new Font("Monospace", Font.BOLD, 40));
+                
+                emailLabel.setForeground(Color.WHITE);
+                emailLabel.setFont(new Font("Monospace", Font.BOLD, 12));
+                
+                pwLabel.setForeground(Color.WHITE);
+                pwLabel.setFont(new Font("Monospace", Font.BOLD, 12));
+                
+                pwAgainLabel.setForeground(Color.WHITE);
+                pwAgainLabel.setFont(new Font("Monospace", Font.BOLD, 12));
+                
+                sexLabel.setForeground(Color.WHITE);
+                sexLabel.setFont(new Font("Monospace", Font.BOLD, 12));
+                
+                dateLabel.setForeground(Color.WHITE);
+                dateLabel.setFont(new Font("Monospace", Font.BOLD, 12));
+                
+                registerButton.setForeground(Color.WHITE);
+                registerButton.setFont(new Font("Monospace", Font.BOLD, 12));
+                registerButton.setBackground(new Color(64,64,64));
+                registerButton.setFocusPainted(false);
 	}
         
         public void paintComponent(Graphics g) {
@@ -121,7 +147,7 @@ public class RegisterPanel extends JPanel {
                 sexGroup.add(isFemale);
                 sexGroup.add(isMale);
                 
-                gc.insets = new Insets(5, 0, 0, 290);
+                gc.insets = new Insets(5, 0, 0, 280);
                 gc.weightx = 0.2;
                 gc.gridx = 0;
                 gc.gridy = 9;

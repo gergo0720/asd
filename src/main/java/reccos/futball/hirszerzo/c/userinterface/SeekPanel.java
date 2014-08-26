@@ -74,6 +74,8 @@ public class SeekPanel extends JPanel {
         mh = maxHours > 9 ? maxHours.toString() : "0"+maxHours;
         
         showTimer.setText(h + ":" + m + ":" + s + " / " + mh + ":" + mm + ":" + ms);
+        showTimer.setForeground(Color.WHITE);
+        showTimer.setFont(new Font("Monospace", Font.BOLD, 12));
     }
     
 }

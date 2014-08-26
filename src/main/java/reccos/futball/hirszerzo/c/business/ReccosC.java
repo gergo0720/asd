@@ -56,6 +56,7 @@ public class ReccosC extends JFrame {
                 setSize(400, 540);
                 setResizable(false);
                 setLocationRelativeTo(null);
+                setBackground(new Color(96,96,96));
                 setTitle("Futball hírszerző");
                
                 watchPanel = new WatchPanel();
@@ -145,6 +146,7 @@ public class ReccosC extends JFrame {
                                         getContentPane().removeAll();
                                         setSize(new Dimension(1050, 600));
                                         setLocationRelativeTo(null);
+                                        setBackground(new Color(128,128,128));
                                         VideoFrame vf = new VideoFrame(frame);
                                         //vf.playVideo();
                                         validate();
