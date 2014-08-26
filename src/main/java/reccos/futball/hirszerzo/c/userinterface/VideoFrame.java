@@ -50,6 +50,7 @@ public class VideoFrame{
     JPanel vidandcontrol;
     static Integer startCounter = 1;
     static Boolean playing = true;
+    static Boolean isNowPlaying = false;
     JLabel blank;
     ImageIcon imageIcon;
     String video = null;
@@ -117,6 +118,8 @@ public class VideoFrame{
     }
     public void playVideo() {
         player.playMedia(video);
+        VideoFrame.isNowPlaying = true;
+        watchPanel.enableButtons();
         
     }
     
@@ -125,6 +128,8 @@ public class VideoFrame{
             player.stop();
             seekPanel.timerStop();
             seekPanel.timerChanged = false;
+            VideoFrame.isNowPlaying = false;
+            watchPanel.disableButtons();
         }
     }
     
@@ -157,12 +162,16 @@ public class VideoFrame{
 
                         if(player.isPlaying()) {
                             pauseVideo();
+                            VideoFrame.isNowPlaying = false;
                             videoControlPanel.play.setText("Start");
                             seekPanel.timerStop();
+                            watchPanel.disableButtons();
                         } else if(!player.isPlaying()) {
                             pauseVideo();
+                            VideoFrame.isNowPlaying = true;
                             videoControlPanel.play.setText("Szünet");
                             seekPanel.timerStart();
+                            watchPanel.enableButtons();
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Még nem választott videót, a tallózás gomb segítségével tölthet be videót.");

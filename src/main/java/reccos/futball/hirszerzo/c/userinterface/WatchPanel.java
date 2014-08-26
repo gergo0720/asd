@@ -56,12 +56,25 @@ public class WatchPanel extends JPanel {
                         remove(playerPanel);
                         annotationLayout.setAnnotationLayout(playerPanel.getSelectedName());
                         setupFollowedPersonPanel();
+                        setBackground(Color.red);
                         add(annotationLayout);
+                        
                         repaint();
+                        
+                            
                 }
             });
         }
         
+        public void enableButtons() {
+            annotationLayout.enableButtons();
+        }
+        
+        public void disableButtons() {
+            annotationLayout.disableButtons();
+        }
+        
+       
         
         
         

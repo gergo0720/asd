@@ -34,7 +34,7 @@ public class Annotator {
                     + "\" player=\"" + playerID
                     + "\"/>\n";
             JabberSmackApi.getInstance().sendMessage(message);
-
+            System.out.println("player: " + message + " was sent");
     }
 
     public static void sendRefereeEvent(String qualifier) throws XMPPException, IllegalStateException, IllegalArgumentException{
@@ -49,5 +49,6 @@ public class Annotator {
             //  + "\" userID=\"" + username
             + "\"/>\n";
             JabberSmackApi.getInstance().sendMessage(message);
+            System.out.println("referee: " + message + " was sent");
     }
 }

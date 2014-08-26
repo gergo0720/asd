@@ -12,6 +12,8 @@ import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -23,9 +25,13 @@ import javax.swing.SwingConstants;
  *
  * @author koverg
  */
-public class AnnotationLayouts extends JPanel {
+public class AnnotationLayouts extends JPanel implements ActionListener{
     JPanel referee;
     JPanel players;
+    String titles[] = {"Passz", "Passz", "Csel", "Csel", "Szerel", "Szerel", "Lő", "Lő", "Helyezkedés", "Helyezkedés",
+                        "Szabálytalan", "Szabálytalan"};
+    JButton button;
+    JButton[] buttons = new JButton[12];
     
     public AnnotationLayouts() {
         setPreferredSize(new Dimension(240, 500));
@@ -50,7 +56,9 @@ public class AnnotationLayouts extends JPanel {
         //players.setBackground(Color.red);
         players.setLayout(new GridLayout(6,2));
         for(Integer i = 0; i < 12; i++) {
-            JButton button = new JButton("Felirat");
+            button = new JButton(titles[i]);
+            buttons[i] = button;
+            button.addActionListener(this);
             button.setVerticalTextPosition(SwingConstants.TOP);
             button.setHorizontalTextPosition(SwingConstants.CENTER);
             button.setForeground(Color.WHITE);
@@ -61,17 +69,19 @@ public class AnnotationLayouts extends JPanel {
             players.add(button);
             try {
             
-            Image img = null;
-            if(i%2==0) {
-                img = ImageIO.read(getClass().getResource("/notok.png"));
-            } else {
-                img = ImageIO.read(getClass().getResource("/ok.png"));
+                Image img = null;
+                if(i%2==0) {
+                    img = ImageIO.read(getClass().getResource("/notok.png"));
+                } else {
+                    img = ImageIO.read(getClass().getResource("/ok.png"));
+                }
+                newImg = img.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+                button.setIcon(new ImageIcon(newImg));
+            } catch (IOException ex) {
+                
             }
-        newImg = img.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
-        button.setIcon(new ImageIcon(newImg));
-      } catch (IOException ex) {
-  }
         }
+        disableButtons();
         add(players);
     }
     
@@ -80,4 +90,30 @@ public class AnnotationLayouts extends JPanel {
         referee.setBackground(Color.pink);
         add(referee);
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        for(JButton b: buttons) {
+            if(e.getSource().equals(b)){
+                if(VideoFrame.isNowPlaying) {
+                    System.out.println(b.getText());
+                }
+            }
+        }
+    }
+    
+    public void enableButtons() {
+        for(JButton b: buttons) {
+            b.setEnabled(true);
+        }
+    }
+    
+    public void disableButtons() {
+        for(JButton b: buttons) {
+            b.setEnabled(false);
+        }
+    }
+    
+    
+    
 }
